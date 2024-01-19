@@ -47,6 +47,12 @@ class MentorController extends Controller
 
         return view('admin.tambah_mentor',compact('pendaftaran_mentor','mentor'));
     }
+    public function pemesanan_mentor($id)
+    {   
+        $mentor = Mentor::find($id);
+        // dd($mentor);    
+        return view('website.pemesanan_mentor',compact('mentor'));
+    }
     public function tambah_mentor_detail($id)
     {
         $data = PendaftaranMentor::find($id);

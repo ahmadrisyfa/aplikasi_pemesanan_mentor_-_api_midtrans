@@ -34,4 +34,8 @@ class WebsiteController extends Controller
 
         return view('website.category_detail', compact('mentor', 'jenis_mentor'));
     }
+    public function pendaftaran_mentor()
+    {
+        return view('website.pendaftaran_mentor');
+    }
 }

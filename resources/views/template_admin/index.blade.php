@@ -67,7 +67,7 @@
           </a>
         </li><!-- End Search Icon--> --}}
 
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
@@ -140,7 +140,7 @@
 
           </ul><!-- End Notification Dropdown Items -->
 
-        </li><!-- End Notification Nav -->
+        </li>
 
         <li class="nav-item dropdown">
 
@@ -206,7 +206,7 @@
 
           </ul><!-- End Messages Dropdown Items -->
 
-        </li><!-- End Messages Nav -->
+        </li> --}}
 
         <li class="nav-item dropdown pe-3">
 
@@ -253,7 +253,15 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{{url('/')}}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Ke Website</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li>
               {{-- <form action="{{url('logout')}}" method="post">
                 @csrf
@@ -300,10 +308,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link collapsed" href="{{url('admin/pembayaran_trainer')}}">
+              <i class="bi bi-calendar-date"></i><span>Pembayaran Trainer</span>
+            </a>
+          </li>
+          {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="{{url('admin/pembatalan')}}">
               <i class="bi bi-backspace-fill"></i><span>Pembatalan</span>
             </a>
-          </li>
+          </li> --}}
         
           
             

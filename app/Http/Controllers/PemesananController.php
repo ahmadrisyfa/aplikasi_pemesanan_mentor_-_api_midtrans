@@ -49,4 +49,18 @@ class PemesananController extends Controller
         return view('admin.cetak_pemesanan',compact('pemesanan'));
     }
 
+    public function pemesanan_cetak_tanggal(Request $request)
+    {
+        $tanggal_awal = $request->input('tanggal_awal');
+        $tanggal_akhir = $request->input('tanggal_akhir');
+        
+        $pemesanan = Pemesanan::where('tanggal_kegiatan', '>=', $tanggal_awal)
+                            ->where('tanggal_kegiatan', '<=', $tanggal_akhir)
+                            ->get();
+        
+    
+    
+        return view('admin.cetak_pemesanan', compact('pemesanan'));
+    }
+
 }

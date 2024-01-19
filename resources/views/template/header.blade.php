@@ -23,6 +23,26 @@
     <link rel="stylesheet" href="{{asset('template')}}/assets/css/templatemo-digimedia-v1.css">
     <link rel="stylesheet" href="{{asset('template')}}/assets/css/animated.css">
     <link rel="stylesheet" href="{{asset('template')}}/assets/css/owl.css">
+    <style>
+      .floating {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+        }
+
+        .fab-icon {
+        margin-top: 16px;
+        }
+    </style>
 <!--
 
 TemplateMo 568 DigiMedia
@@ -85,10 +105,10 @@ https://templatemo.com/tm-568-digimedia
             <ul class="nav">
               <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
               <li class="scroll-to-section"><a href="#layanan">Layanan</a></li>
-              <li class="scroll-to-section"><a href="#mentor">Pilih Mentor</a></li> 
+              <li class="scroll-to-section"><a href="#mentor">Pilih Trainer</a></li> 
               <li class="scroll-to-section"><a href="#portofolio">Portofolio</a></li>
               <li class="scroll-to-section"><a href="#tentang_kami">Tentang Kami</a></li>
-              <li class="scroll-to-section"><a href="{{url('pembatalan')}}">Pembatalan</a></li>
+              {{-- <li class="scroll-to-section"><a href="{{url('pembatalan')}}">Pembatalan</a></li> --}}
 
               {{-- <li class="scroll-to-section"><a href="#DaftarMentor">Daftar Mentor</a></li>  --}}
               @auth
@@ -109,3 +129,6 @@ https://templatemo.com/tm-568-digimedia
       </div>
     </div>
   </header>
+  <a href="https://wa.me/6285867770343" class="floating" target="_blank">
+    <i class="fa fa-whatsapp fab-icon"></i>
+    </a>

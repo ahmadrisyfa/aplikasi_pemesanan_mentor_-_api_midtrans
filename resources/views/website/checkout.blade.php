@@ -1,4 +1,4 @@
-@include('template.header')
+{{-- @include('template.header') --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,81 +8,33 @@
     <script type="text/javascript"
       src="https://app.sandbox.midtrans.com/snap/snap.js"
       data-client-key="{{config('midtrans.client_key')}}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
     
 
-  <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-  
+  <div class="container">
+    <div class="card card-body mt-5">
 
-<div id="DaftarMentor" class="contact-us section">
-    <div class="container">
-      <div class="row">
-{{-- <div id="snap-container"></div> --}}
+      <section class="section profile">
+        <div class="row">
+            <div class="col-lg-12">   
 
-        <div class="col-lg-6 offset-lg-3">
-          <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h6>Pembayaran Pemesanan Mentor</h6>
-            <h4>Silahkan Selesaikan Pembayaran Anda</h4>
-            {{-- @if(session()->has('LoginError'))
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                <i class="bi bi-check-circle me-1"></i>
-                        {{ session('LoginError') }}
-            </div>
-          @endif  --}}
-          @if(session()->has('message'))
-          <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-              <i class="bi bi-check-circle me-1"></i>
-                      {{ session('message') }}
-          </div>
-          @endif 
-            <div class="line-dec"></div>
-          </div>
-        </div>
-        <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
-        <form id="contact">
-            <div class="row">                        
-              <div class="col-lg-12">
-                <div class="fill-form">
-                  <h3 style="color: #837CE6;margin-bottom:30px">Detail Mentor Yang Anda Pesan</h3>
-                  <div class="row">                    
-                    <div class="col-lg-6">
-                        <span><b>Nama Lengkap: </b>{{$data->nama}}</span> <br><br>
-                        <span><b>Keahlian: </b>{{$data->keahlian}}</span> <br><br>
-                        <span><b>Pendidikan: </b>{{$data->pendidikan}}</span> <br><br>
-                        <span><b>Portofolio: </b>{{$data->portofolio}}</span> <br><br>
-                        <span><b>Vidio profile: <br></b><video src="{{$data->vidio_profile}}" width="400" height="300" controls>Your browser does not support the video tag.</video></span> <br><br>                        
-                      </div>                    
-                      <div class="col-lg-6">
-                        <span><b>Harga: </b>{{ 'Rp. ' . number_format($data->harga, 0, ',', '.') }}</span> <br><br>
-                        <span><b>Jenis: </b>{{$data->jenis}}</span> <br><br>
-                        <span><b>Alamat: </b>{{$data->alamat}}</span> <br><br>
-                        <span><b>Foto Mentor: <br> </b><img src="{{$data->photo}}" style="max-width: 300px; max-height: 300px;" alt=""></span> <br><br>
-                    </div>   
-                    <div class="col-lg-12">                        
-                            <fieldset>
-                              <input required type="subject" name="jam" id="jam" placeholder="Masukan Jam Metting Anda Anda">
-                            </fieldset>                            
-                            
-                            <div class="col-lg-12">
-                              <fieldset>
-                                  <button  id="pay-button" class="main-button">Submit</button>
-                            </fieldset>
+                          <div class="col-lg-6 offset-lg-3" style="text-align: center">
+                            <div class="section-heading">
+                              <h6>Pembayaran Pemesanan Mentor</h6>
+                              <button  id="pay-button" class="btn btn-success main-button" style="text-align: center">Bayar</button>
                             </div>
-                        </div>
-                  </div>
-                </div>
-            </div>
-            </div>
-        </form>
+                          </div>      
+                            <input required style="display: none" type="subject" name="jam" id="jam" placeholder="Masukan Jam Metting Anda Anda">                                                        
+              </div>
         </div>
-      </div>
-</div>
+      </section>
+    </div>
+  </div>
 
 
-{{-- <button id="pay-button">Pay!</button> --}}
-
-<!-- @TODO: You can add the desired ID as a reference for the embedId parameter. -->
 
 <script type="text/javascript">
     // For example trigger on button clicked, or any time you need
@@ -109,7 +61,7 @@
       })
     });
   </script>
-@include('template.footer')
+{{-- @include('template.footer') --}}
 </body>
 </html>
 

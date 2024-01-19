@@ -404,7 +404,7 @@
             console.log(xhr.responseText);
         }
     });
-});
+    });
 
 
       $(document).on('click', '.detail-pendaftaran-button', function(event) {

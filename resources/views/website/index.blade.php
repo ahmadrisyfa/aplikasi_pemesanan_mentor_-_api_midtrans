@@ -653,7 +653,7 @@
               <a href="{{url('pemesanan_mentor/'.$data_mentor->id.'/detail')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{$data_mentor->photo}}" alt="">
+                  <img src="{{$data_mentor->photo}}" style="width: 180px;height:150px" alt="">
                 </div>
                 <div class="down-content">
                   <h4>{{$data_mentor->nama}}</h4>
@@ -719,28 +719,12 @@
                           <a href="#">123 Rio de Janeiro</a>
                         </div>
                       </div>
-                    </div>
-                    {{-- <div class="col-lg-6">
-                      <fieldset>
-                        <input type="name" name="name" id="name" placeholder="Name" required>
-                      </fieldset>
-                      <fieldset>
-                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
-                      </fieldset>
-                      <fieldset>
-                        <input type="subject" name="subject" id="subject" placeholder="Subject">
-                      </fieldset>
-                    </div>
-                    <div class="col-lg-6">
-                      <fieldset>
-                        <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
-                      </fieldset>
-                    </div>
+                    </div>                  
                     <div class="col-lg-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="main-button ">Send Message Now</button>
+                      <fieldset style="text-align: center;margin-top:20px">
+                        <a href="{{url('pendaftaran_mentor')}}" class="btn btn-success" >Pendaftaran Trainer</a>
                       </fieldset>
-                    </div> --}}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -750,7 +734,7 @@
       </div>
     </div>
   </div> 
-  <div id="DaftarMentor" class="contact-us section">
+  {{-- <div id="DaftarMentor" class="contact-us section">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
@@ -801,7 +785,6 @@
                         <span style="padding-right: 300px;">Cuplikan video Profile</span>
                         <input required type="file" name="cuplikan_vidio_profile" id="cuplikan_vidio_profile" placeholder="Cuplikan video Profile (max 20Mb)">
                       </fieldset>
-                      {{-- <fieldset class="mt-4"> --}}
                       <fieldset>
                         <select name="jenis_mentor" required="" id="jenis_mentor" class="form-select" style="margin-top: 33px;border-radius:500px">
                           <option selected disabled style="text-align: center">--- Jenis Mentor ---</option>
@@ -835,7 +818,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>  --}}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $("#contact").submit(function(event) {

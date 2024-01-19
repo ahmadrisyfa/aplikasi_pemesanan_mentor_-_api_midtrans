@@ -24,30 +24,24 @@
         <thead>
           <tr>
             <th>No</th>
+            <th>Nik</th>
             <th>Nama</th>
-            <th>Mentor</th>
-            <th>Tanggal Kegiatan</th>
-            <th>Jam</th>
-            <th>Harga</th>
-            <th>Bayar</th>
+            <th>Jenis Trainer</th>
+            <th>Tanggal Bulan Tahun</th>
+            <th>Jumlah Potongan</th>
+            <th>Jumlah Pembayaran</th>
           </tr>
         </thead>
         <tbody>                        
-          @foreach ($pemesanan as $value)
+          @foreach ($PembayaranTrainer as $value)
           <tr>
             <td>{{$loop->iteration}}</td>
+            <td>{{$value->nik}}</td>
             <td>{{$value->nama}}</td>
             <td>{{$value->mentor->nama}}</td>
-            <td>{{$value->tanggal_kegiatan}}</td>                      
-            <td>{{$value->jam}}</td>
-            <td>{{ 'Rp. ' . number_format($value->mentor->harga, 0, ',', '.') }}</td>
-            <td>
-                @if($value->bayar == 0)
-                        <b>Belum Bayar</b>    
-                @elseif($value->bayar == 1)
-                        <b>Lunas</b>
-                @endif
-            </td>
+            <td>{{$value->tanggal}}</td>                      
+            <td>{{ 'Rp. ' . number_format($value->jumlah_potongan, 0, ',', '.') }}</td>
+            <td>{{ 'Rp. ' . number_format($value->jumlah_pembayaran, 0, ',', '.') }}</td>          
           </tr>
           @endforeach
         

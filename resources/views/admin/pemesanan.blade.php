@@ -20,7 +20,21 @@
               {{-- <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
                 Tambah Data Mentor
             </button>      --}}
-            <a href="{{url('pemesanan_cetak')}}" class="btn btn-success mt-2" target="_blank">Cetak data (Laporan)</a>
+            <form action="{{url('pemesanan_cetak_tanggal')}}" method="post" target="_blank">
+                @csrf
+                <div class="row">
+                    <div class="col-md-3">
+                        <input class="form-control mt-2" required type="date" name="tanggal_awal" id="tanggal_awal">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control mt-2" required type="date" name="tanggal_akhir" id="tanggal_akhir">
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success mt-2" >Cetak Data (Laporan)</button>
+                    </div>
+                </div>
+            </form>
+            {{-- <a href="{{url('pemesanan_cetak')}}" class="btn btn-success mt-2" target="_blank">Cetak data (Laporan)</a> --}}
               <thead>
                   <tr>
                   <th scope="col">#</th>
@@ -69,6 +83,7 @@
     </div>
   </section>
 
+  
   <div class="modal fade" id="EditModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">

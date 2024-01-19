@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[App\Http\Controllers\WebsiteController::class,'index']);
 Route::get('/jenis_mentor/{category}',[App\Http\Controllers\WebsiteController::class,'jenis_mentor_detail']);
 Route::post('/jenis_mentor/{category}', [App\Http\Controllers\WebsiteController::class,'search_jenis_mentor']);
+Route::get('/pendaftaran_mentor',[App\Http\Controllers\WebsiteController::class,'pendaftaran_mentor']);
 
 
 Route::post('/daftar_mentor/create',[App\Http\Controllers\MentorController::class,'create']);
@@ -33,6 +34,7 @@ Route::get('/logout',[App\Http\Controllers\LoginController::class,'logout']);
 
 Route::get('pemesanan_mentor/{id}/detail',[App\Http\Controllers\MentorController::class,'pemesanan_mentor_detail']);
 Route::post('pemesanan_mentor/store',[App\Http\Controllers\MentorController::class,'pemesanan_mentor_store']);
+Route::get('pemesanan_mentor/{id}',[App\Http\Controllers\MentorController::class,'pemesanan_mentor']);
 
 
 Route::get('pembatalan',[App\Http\Controllers\PembatalanController::class,'index']);
@@ -62,6 +64,19 @@ Route::get('pemesanan_delete/{id}',[App\Http\Controllers\PemesananController::cl
 Route::get('pemesanan_edit/{id}',[App\Http\Controllers\PemesananController::class,'pemesanan_edit']);
 Route::post('pemesanan_update/{id}',[App\Http\Controllers\PemesananController::class,'pemesanan_update']);
 Route::get('pemesanan_cetak',[App\Http\Controllers\PemesananController::class,'cetak']);
+
+Route::post('pemesanan_cetak_tanggal',[App\Http\Controllers\PemesananController::class,'pemesanan_cetak_tanggal']);
+
+
+
+
+Route::get('admin/pembayaran_trainer',[App\Http\Controllers\PembayaranTrainerController::class,'index']);
+Route::post('tambah_pembayaran_trainer',[App\Http\Controllers\PembayaranTrainerController::class,'tambah_pembayaran_trainer']);
+Route::get('edit_pembayaran_trainer/{id}',[App\Http\Controllers\PembayaranTrainerController::class,'edit_pembayaran_trainer']);
+Route::post('pembayaran_trainer_update/{id}',[App\Http\Controllers\PembayaranTrainerController::class,'pembayaran_trainer_update']);
+Route::get('pembayaran_trainer_delete/{id}',[App\Http\Controllers\PembayaranTrainerController::class,'pembayaran_trainer_delete']);
+Route::post('pembayaran_trainer_cetak_tanggal',[App\Http\Controllers\PembayaranTrainerController::class,'pembayaran_trainer_cetak_tanggal']);
+
 
 
 Route::get('admin/pembatalan',[App\Http\Controllers\PembatalanController::class,'index_admin']);

@@ -19,17 +19,17 @@ class UserSeeder extends Seeder
         // Contoh data user
         $users = [
             [
-                'name' => 'John Doe',
-                'email' => 'john@example.com',
+                'name' => 'Admin',
+                'email' => 'admin1@gmail.com',
                 'is_admin' => '1',                
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12345678'),
                 
             ],
             [
-                'name' => 'Jane Doe',
-                'email' => 'jane@example.com',
+                'name' => 'Admin',
+                'email' => 'Admin2@gmail.com',
                 'is_admin' => '1',                
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12345678'),
                 
             ],
             // Tambahkan data lain jika diperlukan
