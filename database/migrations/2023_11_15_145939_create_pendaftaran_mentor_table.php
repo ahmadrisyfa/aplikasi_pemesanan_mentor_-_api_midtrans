@@ -15,19 +15,22 @@ return new class extends Migration
     {
         Schema::create('pendaftaran_mentor', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lengkap');
-            $table->string('ttl');
-            $table->string('nik');
-            $table->text('alamat');
+            $table->string('user_id')->nullable();
+            $table->string('nama_lengkap')->nullable();
+            $table->string('ttl')->nullable();
+            $table->string('nik')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('email')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('pendidikan_non_akademik')->nullable();
             $table->string('keahlian')->nullable();
-            $table->string('sertifikat_keahlian')->nullable();
+            $table->text('sertifikat_keahlian')->nullable();
             $table->string('portofolio_kegiatan')->nullable();
             $table->string('cuplikan_vidio_profile')->nullable();
             $table->string('upload_foto')->nullable();
             $table->string('jenis_mentor')->nullable();
             $table->string('ratecard')->nullable();
+            $table->string('status')->nullable()->default('0');
             $table->timestamps();
         });
     }

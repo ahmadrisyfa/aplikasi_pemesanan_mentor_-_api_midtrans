@@ -12,8 +12,8 @@ class DashboardController extends Controller
 {
     public function index()
     {        
-        $total_daftar_mentor = PendaftaranMentor::count();
-        $total_mentor = Mentor::count();
+        $total_daftar_mentor = PendaftaranMentor::where('status',0)->count();
+        $total_mentor = PendaftaranMentor::where('status',1)->count();
         $total_pemesanan = Pemesanan::count();
         return view('admin.index',compact('total_daftar_mentor','total_mentor','total_pemesanan'));
     }

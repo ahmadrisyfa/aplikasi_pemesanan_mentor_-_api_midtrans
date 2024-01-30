@@ -7,8 +7,19 @@ use App\Models\PendaftaranMentor;
 use App\Models\Mentor;
 use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AcceptTrainerMail;
+
 class MentorController extends Controller
 {
+
+    public function tambah_mentor()
+    {
+        $pendaftaran_mentor = PendaftaranMentor::where('status',0)->get();
+        $mentor = PendaftaranMentor::where('status',1)->get();
+
+        return view('admin.tambah_mentor',compact('pendaftaran_mentor','mentor'));
+    }
     public function create(Request $request)
     {
         $data = new PendaftaranMentor();
@@ -20,10 +31,22 @@ class MentorController extends Controller
         $data->pendidikan_non_akademik = $request->pendidikan_non_akademik;
         $data->keahlian = $request->keahlian;
         $data->portofolio_kegiatan = $request->portofolio_kegiatan;
+        $data->email = $request->email;
 
-            $sertifikat_keahlian = $request->file('sertifikat_keahlian');
-            $pathFoto = $sertifikat_keahlian->store('public/foto_sertifikat'); 
-            $data->sertifikat_keahlian = asset('storage/' . str_replace('public/', '', $pathFoto));
+
+            // $sertifikat_keahlian = $request->file('sertifikat_keahlian');
+            // $pathFoto = $sertifikat_keahlian->store('public/foto_sertifikat'); 
+            // $data->sertifikat_keahlian = asset('storage/' . str_replace('public/', '', $pathFoto));
+            if ($request->hasFile('sertifikat_keahlian')) {
+                $sertifikat_keahlianPaths = [];
+    
+                foreach ($request->file('sertifikat_keahlian') as $file) {
+                    $pathFoto = $file->store('public/foto_sertifikat');
+                    $sertifikat_keahlianPaths[] = asset('storage/' . str_replace('public/', '', $pathFoto));
+                }
+    
+                $data->sertifikat_keahlian = $sertifikat_keahlianPaths;
+            }
 
             $foto = $request->file('upload_foto');
             $pathFoto = $foto->store('public/foto'); 
@@ -39,17 +62,10 @@ class MentorController extends Controller
         
 
         return response()->json(['message' => 'Data created successfully']);
-    }
-    public function tambah_mentor()
-    {
-        $pendaftaran_mentor = PendaftaranMentor::get();
-        $mentor = Mentor::get();
-
-        return view('admin.tambah_mentor',compact('pendaftaran_mentor','mentor'));
-    }
+    }    
     public function pemesanan_mentor($id)
     {   
-        $mentor = Mentor::find($id);
+        $mentor = PendaftaranMentor::find($id);
         // dd($mentor);    
         return view('website.pemesanan_mentor',compact('mentor'));
     }
@@ -60,24 +76,26 @@ class MentorController extends Controller
     }
     public function tambah_mentor_store(Request $request)
     {
-        $data = new Mentor();
-        $data->nama = $request->nama;
+        $data = new PendaftaranMentor();
+        $data->nama_lengkap = $request->nama_lengkap;
+        $data->status = 1;
+
         // $data->photo = $request->photo;
         $data->keahlian = $request->keahlian;
         $data->pendidikan = $request->pendidikan;
-        $data->portofolio = $request->portofolio;
+        $data->portofolio_kegiatan = $request->portofolio_kegiatan;
         // $data->vidio_profile = $request->vidio_profile;
 
-        $foto = $request->file('photo');
-            $pathFoto = $foto->store('public/foto_mentor'); 
-            $data->photo = asset('storage/' . str_replace('public/', '', $pathFoto));
+        $foto = $request->file('upload_foto');
+            $pathFoto = $foto->store('public/foto'); 
+            $data->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
             
-            $video = $request->file('vidio_profile');
-            $pathVideo = $video->store('public/video_mentor'); 
-            $data->vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+            $video = $request->file('cuplikan_vidio_profile');
+            $pathVideo = $video->store('public/video'); 
+            $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
 
-        $data->harga = $request->harga;
-        $data->jenis = $request->jenis;
+        $data->ratecard = $request->ratecard;
+        $data->jenis_mentor = $request->jenis_mentor;
         $data->alamat = $request->alamat;
         $data->save();
 
@@ -85,21 +103,20 @@ class MentorController extends Controller
     }
     public function tambah_mentor_edit($id)
     {
-        $mentor = Mentor::find($id);
+        $mentor = PendaftaranMentor::find($id);
         return response()->json($mentor);
     }
-
     public function tambah_mentor_delete($id)
     {
-        $mentor = Mentor::find($id);
+        $mentor = PendaftaranMentor::find($id);
 
-        if ($mentor->photo) {
-            $photoPath = str_replace(asset('storage/'), 'public/', $mentor->photo);
+        if ($mentor->upload_foto) {
+            $photoPath = str_replace(asset('storage/'), 'public/', $mentor->upload_foto);
             Storage::delete($photoPath);
         }
 
-        if ($mentor->vidio_profile) {
-            $videoPath = str_replace(asset('storage/'), 'public/', $mentor->vidio_profile);
+        if ($mentor->cuplikan_vidio_profile) {
+            $videoPath = str_replace(asset('storage/'), 'public/', $mentor->cuplikan_vidio_profile);
             Storage::delete($videoPath);
         }
 
@@ -107,42 +124,74 @@ class MentorController extends Controller
 
         return response()->json(['message' => 'Data deleted successfully']);
     }
+    public function delete_pendaftaran_mentor($id)
+    {
+        $mentor = PendaftaranMentor::find($id);
 
+        if ($mentor->upload_foto) {
+            $photoPath = str_replace(asset('storage/'), 'public/', $mentor->upload_foto);
+            Storage::delete($photoPath);
+        }
+
+        if ($mentor->cuplikan_vidio_profile) {
+            $videoPath = str_replace(asset('storage/'), 'public/', $mentor->cuplikan_vidio_profile);
+            Storage::delete($videoPath);
+        }
+
+        $mentor->delete();
+
+        return response()->json(['message' => 'Data deleted successfully']);
+    }    
+    public function accept_pendaftaran_mentor($id)
+    {
+        $mentor = PendaftaranMentor::find($id);
+
+        $mentor->status = 1;    
+        $mentor->save();
+        
+        $nama = $mentor->nama_lengkap;
+        $email = $mentor->email;
+
+
+        Mail::to($mentor->email)->send(new AcceptTrainerMail($nama, $email));
+
+        return response()->json(['message' => 'Data Accept successfully']);
+    }
     
     public function tambah_mentor_update(Request $request, $id)
     {
-        $mentor = Mentor::find($id);
+        $mentor = PendaftaranMentor::find($id);
 
         if ($request->hasFile('edit_photo')) {
-            if ($mentor->photo) {
-                $previousPhotoPath = str_replace(asset('storage/'), 'public/', $mentor->photo);
+            if ($mentor->upload_foto) {
+                $previousPhotoPath = str_replace(asset('storage/'), 'public/', $mentor->upload_foto);
                 Storage::delete($previousPhotoPath);
             }
 
             $foto_update = $request->file('edit_photo');
             $pathFoto = $foto_update->store('public/foto'); 
-            $mentor->photo = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $mentor->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
         }
 
         if ($request->hasFile('edit_vidio_profile')) {
-            if ($mentor->vidio_profile) {
-                $previousVideoPath = str_replace(asset('storage/'), 'public/', $mentor->vidio_profile);
+            if ($mentor->cuplikan_vidio_profile) {
+                $previousVideoPath = str_replace(asset('storage/'), 'public/', $mentor->cuplikan_vidio_profile);
                 Storage::delete($previousVideoPath);
             }
             $video_update = $request->file('edit_vidio_profile');
             $pathVideo = $video_update->store('public/video'); 
-            $mentor->vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+            $mentor->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
         }
 
 
 
     
-        $mentor->nama = $request->edit_nama;
+        $mentor->nama_lengkap = $request->edit_nama;
         $mentor->keahlian = $request->edit_keahlian;
         $mentor->pendidikan = $request->edit_pendidikan;
-        $mentor->portofolio = $request->edit_portofolio;
-        $mentor->harga = $request->edit_harga;
-        $mentor->jenis = $request->edit_jenis;
+        $mentor->portofolio_kegiatan = $request->edit_portofolio;
+        $mentor->ratecard = $request->edit_harga;
+        $mentor->jenis_mentor = $request->edit_jenis;
         $mentor->alamat = $request->edit_alamat;
     
         $mentor->save();
@@ -153,7 +202,7 @@ class MentorController extends Controller
 
     public function pemesanan_mentor_detail($id)
     {
-        $mentor = Mentor::find($id);
+        $mentor = PendaftaranMentor::find($id);
         return view('website.pemesanan_mentor_detail',compact('mentor'));
     }
     public function pemesanan_mentor_store(Request $request)
@@ -211,5 +260,6 @@ class MentorController extends Controller
             }
         }
     }
+    
     
 }

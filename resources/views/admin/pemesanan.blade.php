@@ -52,7 +52,7 @@
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tanggal_kegiatan}}</td>
                 @if($data->mentor)
-                <td>{{$data->mentor->nama}}</td>
+                <td>{{$data->mentor->nama_lengkap}}</td>
                 @endif
                 <td>                    
                     @if($data->bayar == 0)
@@ -70,6 +70,7 @@
             
                   <button data-id="{{ $data->id }}"
                     class="delete btn btn-danger btn-sm">Hapus</button>
+                    <a href="{{url('invoice/'.$data->id.'/pemesanan')}}" class="btn btn-info" target="_blank">Cetak</a>
             </tr>
             @endforeach
 

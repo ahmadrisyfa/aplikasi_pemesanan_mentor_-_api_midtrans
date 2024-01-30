@@ -32,7 +32,7 @@
             <table class="table table-borderless datatable">
               <h5 class="card-title">Daftar pembayaran Trainer</h5>
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
-                Tambah Data Mentor
+                Tambah Data Pembayaran Mentor
             </button>
               <thead>
                   <tr>
@@ -43,6 +43,7 @@
                   <th scope="col">Tanggal Bulan Tahun</th>
                   <th scope="col">Jumlah Potongan</th>
                   <th scope="col">Jumlah Pembayaran</th>
+                  <th scope="col">Foto Pembayaran</th>
                   <th scope="col">Aksi</th>
                   </tr>
               </thead>
@@ -52,10 +53,11 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$data->nik}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->mentor->nama}}</td>
+                <td>{{$data->mentor->nama_lengkap}}</td>
                 <td>{{$data->tanggal}}</td>                
                 <td>{{ 'Rp. ' . number_format($data->jumlah_potongan, 0, ',', '.') }}</td>                
-                <td>{{ 'Rp. ' . number_format($data->jumlah_pembayaran, 0, ',', '.') }}</td></td>                
+                <td>{{ 'Rp. ' . number_format($data->jumlah_pembayaran, 0, ',', '.') }}</td>
+                <td><img src="{{asset($data->foto_pembayaran)}}" alt="" width="200px"></td>                
                 <td>
                   <button type="button" class="btn btn-primary btn-sm edit-button"
                         data-id="{{ $data->id }}" data-bs-toggle="modal"
@@ -104,7 +106,7 @@
                     <select required id="jenis_trainer" class="form-select">
                         <option selected disabled style="text-align: center" value="">--- Jenis Mentor ---</option>                    
                         @foreach ($mentor as $data_mentor)                            
-                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama}}</option>
+                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama_lengkap}}</option>
                         @endforeach
                     </select>
                 </div>                 
@@ -115,6 +117,10 @@
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Pembayaran</label>
                     <input required type="number" class="form-control" id="jumlah_pembayaran">
+                </div>
+                <div class="col-12">
+                    <label for="jenis_satuan_barang" class="form-label">Foto Pembayaran</label>
+                    <input required type="file" class="form-control" id="foto_pembayaran">
                 </div>                  
         </div>
         <div class="modal-footer">
@@ -156,7 +162,7 @@
                     <select required id="edit_jenis_trainer" class="form-select">
                         <option selected disabled style="text-align: center" value="">--- Jenis Mentor ---</option>                    
                         @foreach ($mentor as $data_mentor)                            
-                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama}}</option>
+                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama_lengkap}}</option>
                         @endforeach
                     </select>
                 </div>                 
@@ -167,6 +173,13 @@
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Pembayaran</label>
                     <input required type="number" class="form-control" id="edit_jumlah_pembayaran">
+                </div> 
+                <div class="col-12">
+                    <label for="jenis_satuan_barang" class="form-label">Foto Pembayaran</label> 
+                    <br>
+                    <img id="edit_foto_pembayaran_tampil" src="" alt="Uploaded Foto" style="max-width: 300px; max-height: 300px;">   
+                    <br>                         
+                    <input required type="file" class="form-control" id="edit_foto_pembayaran">
                 </div> 
         </div>
         <div class="modal-footer">
@@ -193,6 +206,8 @@
         formData.append("tanggal", $("#tanggal").val());
         formData.append("jumlah_potongan", $("#jumlah_potongan").val());
         formData.append("jumlah_pembayaran", $("#jumlah_pembayaran").val());
+        formData.append("foto_pembayaran", $("#foto_pembayaran")[0].files[0]);
+        
         
         $.ajax({
             url: '{{ url('tambah_pembayaran_trainer') }}',
@@ -224,7 +239,8 @@
                 $('#edit_jenis_trainer').val(data.jenis_trainer)                       
                 $('#edit_tanggal').val(data.tanggal)                       
                 $('#edit_jumlah_potongan').val(data.jumlah_potongan)                       
-                $('#edit_jumlah_pembayaran').val(data.jumlah_pembayaran)                       
+                $('#edit_jumlah_pembayaran').val(data.jumlah_pembayaran)   
+                $('#edit_foto_pembayaran_tampil').attr('src', data.foto_pembayaran);                    
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
@@ -245,6 +261,7 @@
         formData.append("tanggal", $("#edit_tanggal").val());
         formData.append("jumlah_potongan", $("#edit_jumlah_potongan").val());
         formData.append("jumlah_pembayaran", $("#edit_jumlah_pembayaran").val());    
+        formData.append("foto_pembayaran", $("#edit_foto_pembayaran")[0].files[0]); 
 
         $.ajax({
             url: '{{ url('pembayaran_trainer_update') }}/' + id,

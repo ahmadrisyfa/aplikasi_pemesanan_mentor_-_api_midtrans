@@ -38,7 +38,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$value->nik}}</td>
             <td>{{$value->nama}}</td>
-            <td>{{$value->mentor->nama}}</td>
+            <td>{{$value->mentor->nama_lengkap}}</td>
             <td>{{$value->tanggal}}</td>                      
             <td>{{ 'Rp. ' . number_format($value->jumlah_potongan, 0, ',', '.') }}</td>
             <td>{{ 'Rp. ' . number_format($value->jumlah_pembayaran, 0, ',', '.') }}</td>          

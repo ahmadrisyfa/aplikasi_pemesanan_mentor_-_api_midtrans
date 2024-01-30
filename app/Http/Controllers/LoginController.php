@@ -26,7 +26,7 @@ class LoginController extends Controller
                 return redirect()->intended('admin/dashboard')->with('berhasil','Berhasil Login');
             }
         
-            return redirect()->intended('/')->with('berhasil','Berhasil Login');
+            return redirect()->intended('/daftar_pendaftaran')->with('berhasil','Berhasil Login');
         }
         return back()->with('LoginError', 'Login gagal, Silahkan Ulangi Lagi');
     }

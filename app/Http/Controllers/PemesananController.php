@@ -62,5 +62,9 @@ class PemesananController extends Controller
     
         return view('admin.cetak_pemesanan', compact('pemesanan'));
     }
+    public function invoice($id){
+        $data = Pemesanan::find($id);
+        return view('admin.invoice',compact('data'));
+    }
 
 }

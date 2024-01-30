@@ -6,8 +6,8 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h6>Detail Mentor</h6>
-            <h4>SIlahkan Pilih mentor Yang Anda Inginkan</h4>
+            <h6>Detail Trainer</h6>
+            <h4>SIlahkan Pilih Trainer Yang Anda Inginkan</h4>
             {{-- @if(session()->has('LoginError'))
             <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
                 <i class="bi bi-check-circle me-1"></i>
@@ -30,20 +30,20 @@
             <div class="row">                        
               <div class="col-lg-12">
                 <div class="fill-form">
-                  <h3 style="color: #837CE6;margin-bottom:30px">Detail Mentor</h3>
+                  <h3 style="color: #837CE6;margin-bottom:30px">Detail Trainer</h3>
                   <div class="row">                    
                     <div class="col-lg-6">
-                        <span><b>Nama Lengkap: </b>{{$mentor->nama}}</span> <br><br>
+                        <span><b>Nama Lengkap: </b>{{$mentor->nama_lengkap}}</span> <br><br>
                         <span><b>Keahlian: </b>{{$mentor->keahlian}}</span> <br><br>
                         <span><b>Pendidikan: </b>{{$mentor->pendidikan}}</span> <br><br>
-                        <span><b>Portofolio: </b>{{$mentor->portofolio}}</span> <br><br>
-                        <span><b>Vidio profile: <br></b><video src="{{$mentor->vidio_profile}}" width="400" height="300" controls>Your browser does not support the video tag.</video></span> <br><br>                        
+                        <span><b>Portofolio: </b>{{$mentor->portofolio_kegiatan}}</span> <br><br>
+                        <span><b>Vidio profile: <br></b><video src="{{$mentor->cuplikan_vidio_profile}}" width="400" height="300" controls>Your browser does not support the video tag.</video></span> <br><br>                        
                       </div>                    
                       <div class="col-lg-6">
-                        <span><b>Harga: </b>{{ 'Rp. ' . number_format($mentor->harga, 0, ',', '.') }}</span> <br><br>
-                        <span><b>Jenis: </b>{{$mentor->jenis}}</span> <br><br>
+                        {{-- <span><b>Harga: </b>{{ 'Rp. ' . number_format($mentor->harga, 0, ',', '.') }}</span> <br><br> --}}
+                        <span><b>Jenis: </b>{{$mentor->jenis_mentor}}</span> <br><br>
                         <span><b>Alamat: </b>{{$mentor->alamat}}</span> <br><br>
-                        <span><b>Foto Mentor: <br> </b><img src="{{$mentor->photo}}" style="max-width: 300px; max-height: 300px;" alt=""></span> <br><br>
+                        <span><b>Foto Trainer: <br> </b><img src="{{$mentor->upload_foto}}" style="max-width: 300px; max-height: 300px;" alt=""></span> <br><br>
                     </div>   
                     <div class="col-lg-12">
                       <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -51,7 +51,7 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header">
                             <button class="accordion-button collapsed" onclick="window.open('https://api.whatsapp.com/send/?phone=6285867770343&text=Saya Ingin Berdiskusi Detail Mentor Dengan Id%20{{$mentor->id}}&type=phone_number&app_absent=0', '_blank')" style="text-align: center">
-                              Pesan Mentor Sekarang
+                              Pesan Trainer Sekarang
                             </button>
                           
                           

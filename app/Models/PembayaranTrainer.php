@@ -12,6 +12,6 @@ class PembayaranTrainer extends Model
     protected $guarded = ['id'];
 
     public function mentor() {
-        return $this->belongsTo(Mentor::class, 'jenis_trainer', 'id');
+        return $this->belongsTo(PendaftaranMentor::class, 'jenis_trainer', 'id');
     }
 }

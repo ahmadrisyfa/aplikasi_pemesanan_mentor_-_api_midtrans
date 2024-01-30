@@ -20,13 +20,17 @@
               <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h6>Digital Media Agency</h6>
-                    <h2>We Boost Your Website Traffic</h2>
-                    <p>This template is brought to you by TemplateMo website. Feel free to use this for a commercial purpose. You are not allowed to redistribute the template ZIP file on any other template website. Thank you.</p>
+                    <h6 style="color: #7761b7">HyCoach Indonesia</h6>
+                    <h2 style="color: #7761b7">Selamat Datang Di Website</h2>
+                    <p style="color: #7761b7">HyCoach Indonesia
+
+                      Jika anda sedang mencari para Trainer, Motivator, dan Coach untuk peningkatan kapasitas SDM perusahaan atau instansi anda. Maka HyCoach Indonesia akan membantu anda dalam meningkatkan SDM yang berkualitas dan berdaya saing.
+                      
+                      </p>
                   </div>
                   <div class="col-lg-12">
                     <div class="border-first-button scroll-to-section">
-                      <a href="#contact">Free Quote</a>
+                      <a  href="https://wa.me/6285867770343" style="color: #7761b7">Konsultasi Sekarang!</a>
                     </div>
                   </div>
                 </div>
@@ -512,12 +516,20 @@
                           <div class="row">
                             <div class="col-lg-6 align-self-center">
                               <div class="left-text">
-                                <h4>SEO Analysis &amp; Daily Reports</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
-                                  dover lipsum lorem and the others.</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
+                                <h4>Seo Analysis (Tentang HyCoach Indonesia)
+                              </h4>
+                                <p>  Kami adalah platform penyedia para Trainer, Motivator, dan Coach Profesional yang telah berpengalaman memberikan berbagai training, motivasi, dan coaching di perusahaan swasta, BUMN, instansi Pemerintah, dan Kementrian Republik Indonesia. HyCoach Indonesia merupakan salah satu bagian dari unit usaha PT. Hafara Aqiba Nusantara.
+                            
+                                </p>
+                                  <h4>Adapun kelebihan kami :</h4>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i>Fasilitator sangat Berpengalaman</span>
+                                  <span><i class="fa fa-check"></i>Memiliki Sertifikasi Kompetensi</span>
+                                  <span><i class="fa fa-check"></i>Komunikatif</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Penyampaian Fun dan Energik</span> 
+                                  <span><i class="fa fa-check"></i>Bisa Custom Materi</span>
+                                </div>
+                                {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p> --}}
                               </div>
                             </div>
                             <div class="col-lg-6 align-self-center">
@@ -653,10 +665,10 @@
               <a href="{{url('pemesanan_mentor/'.$data_mentor->id.'/detail')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{$data_mentor->photo}}" style="width: 180px;height:150px" alt="">
+                  <img src="{{$data_mentor->upload_foto}}" style="width: 180px;height:150px" alt="">
                 </div>
                 <div class="down-content">
-                  <h4>{{$data_mentor->nama}}</h4>
+                  <h4>{{$data_mentor->nama_lengkap}}</h4>
                   {{-- <span>{{$data_mentor->alamat}}</span> --}}
                   <span>{{substr($data_mentor->alamat, 0, 70)}}</span>
 
@@ -690,33 +702,37 @@
               </div>
               <div class="col-lg-5">
                 <div id="map">
-                  <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="636px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6661399774803!2d107.731973073791!3d-6.930449167835769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68c338fff37819%3A0xb3d9da2e5eb7f1f6!2sPT.%20Hafara%20Aqiba%20Nusantara%20(%20Hafara%20Group%20)!5e0!3m2!1sid!2sid!4v1706006668006!5m2!1sid!2sid" width="100%" height="636px" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
               </div>
               <div class="col-lg-7">
                 <div class="fill-form">
                   <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="info-post">
                         <div class="icon">
                           <img src="{{asset('template')}}/assets/images/phone-icon.png" alt="">
-                          <a href="#">010-020-0340</a>
+                          <a href="wa.me/6289675678830" target="_blank">+6289675678830</a>
+                          <a href="wa.me/6281324511570" target="_blank">+6281324511570</a>
+
                         </div>
                       </div>
-                    </div>
-                    <div class="col-lg-4">
+                    </div>                    
+                    <div class="col-lg-6">
                       <div class="info-post">
                         <div class="icon">
                           <img src="{{asset('template')}}/assets/images/email-icon.png" alt="">
-                          <a href="#">our@email.com</a>
+                          <a href="#">admin@hafaragroup.com</a>
+                          <a href="#">hafaraaqiba@gmail.com
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4">
+                  
+                    <div class="col-lg-12">
                       <div class="info-post">
                         <div class="icon">
-                          <img src="{{asset('template')}}/assets/images/location-icon.png" alt="">
-                          <a href="#">123 Rio de Janeiro</a>
+                          <img style="text-align: center;margin-left:15px" src="{{asset('template')}}/assets/images/location-icon.png" alt="">
+                          <a href="#">Jl. Cibolerang, Cinunuk, Kec. Cileunyi, Bandung, Jawa Barat</a>
                         </div>
                       </div>
                     </div>                  

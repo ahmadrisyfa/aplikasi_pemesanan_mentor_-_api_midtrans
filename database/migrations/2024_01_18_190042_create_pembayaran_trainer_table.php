@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('tanggal');
             $table->string('jumlah_potongan');
             $table->string('jumlah_pembayaran');
+            $table->string('foto_pembayaran');
             $table->timestamps();
         });
     }

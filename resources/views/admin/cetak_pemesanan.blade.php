@@ -20,6 +20,12 @@
   </style>
 </head>
 <body>
+  <h2><b>Laporan Pemesanan</b></h2>
+                <h4>PT. Hafara Aqiba Nusanta</h4>
+                Jl. Cibolerang, Cinunuk, Kec. Cileunyi, Bandung, Jawa Barat <br>
+                Mobile: 081324511570 <br>
+                Email: info@hafaragroup.com <br>
+                www.HafaraGroup.com</p>
     <table>
         <thead>
           <tr>
@@ -40,7 +46,7 @@
             <td>{{$value->mentor->nama}}</td>
             <td>{{$value->tanggal_kegiatan}}</td>                      
             <td>{{$value->jam}}</td>
-            <td>{{ 'Rp. ' . number_format($value->mentor->harga, 0, ',', '.') }}</td>
+            <td>{{ 'Rp. ' . number_format($value->jumlah_pembayaran, 0, ',', '.') }}</td>
             <td>
                 @if($value->bayar == 0)
                         <b>Belum Bayar</b>    

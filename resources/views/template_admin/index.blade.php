@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,8 +45,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="#" class="logo d-flex align-items-center">
-        <img src="{{asset('template_admin')}}/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        {{-- <img src="{{asset('template_admin')}}/assets/img/logo.png" alt=""> --}}
+        {{-- <span class="d-none d-lg-block">NiceAdmin</span> --}}
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -286,37 +286,60 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+      @if(auth()->user()->is_admin == 1)
+        <li class="nav-heading">Home</li>
+        <li class="nav-item">
+          <a class="nav-link " href="{{url('admin/dashboard')}}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>          
+        <li class="nav-heading">Admin</li>
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="{{url('admin/tambah_mentor')}}">
+                <i class="bi bi-file-earmark-person-fill"></i><span>Daftar trainer & Tambah trainer</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="{{url('admin/pemesanan')}}">
+                <i class="bi bi-bag-check-fill"></i><span>Pemesanan</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="{{url('admin/pembayaran_trainer')}}">
+                <i class="bi bi-calendar-date"></i><span>Pembayaran Trainer</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="{{url('admin/daftar_login_trainer')}}">
+                <i class="bi bi-file-earmark-person"></i><span>Daftar Login Trainer</span>
+              </a>
+            </li>
+            {{-- <li class="nav-item">
+              <a class="nav-link collapsed" href="{{url('admin/pembatalan')}}">
+                <i class="bi bi-backspace-fill"></i><span>Pembatalan</span>
+              </a>
+            </li> --}}
+      @else
       <li class="nav-heading">Home</li>
-
-      <li class="nav-item">
-        <a class="nav-link " href="{{url('admin/dashboard')}}">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-          
-      <li class="nav-heading">Admin</li>
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="{{url('admin/tambah_mentor')}}">
-              <i class="bi bi-file-earmark-person-fill"></i><span>Daftar Mentor & Tambah Mentor</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="{{url('admin/pemesanan')}}">
-              <i class="bi bi-bag-check-fill"></i><span>Pemesanan</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="{{url('admin/pembayaran_trainer')}}">
-              <i class="bi bi-calendar-date"></i><span>Pembayaran Trainer</span>
-            </a>
-          </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link collapsed" href="{{url('admin/pembatalan')}}">
-              <i class="bi bi-backspace-fill"></i><span>Pembatalan</span>
-            </a>
-          </li> --}}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url('daftar_pendaftaran')}}">
+            <i class="bi bi-file-earmark-person-fill"></i><span>Pendaftaran Trainer</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url('daftar_pemesan')}}">
+            <i class="bi bi-card-list"></i><span>Daftar Pemesan</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url('daftar_pembayaran')}}">
+            <i class="bi bi-cash"></i><span>Daftar Pembayaran</span>
+          </a>
+        </li>
+      @endif
+    </ul>
         
           
             
@@ -338,14 +361,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      {{-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> --}}
     </div>
   </footer><!-- End Footer -->
 
