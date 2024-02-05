@@ -42,7 +42,7 @@
                             
                             <div class="accordion-item">
                             {{-- <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" onclick="window.open('https://api.whatsapp.com/send/?phone=6285867770343&text=Teks%20Anda%20Di%20Sini&type=phone_number&app_absent=0', '_blank')" style="text-align: center">
+                                <button class="accordion-button collapsed" onclick="window.open('https://api.whatsapp.com/send/?phone=6289660787591&text=Teks%20Anda%20Di%20Sini&type=phone_number&app_absent=0', '_blank')" style="text-align: center">
                                     Pesan Mentor Sekarang
                                 </button>
                                 

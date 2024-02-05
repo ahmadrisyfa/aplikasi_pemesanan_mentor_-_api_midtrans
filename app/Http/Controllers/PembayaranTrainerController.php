@@ -13,7 +13,7 @@ class PembayaranTrainerController extends Controller
     public function index()
     {
         $mentor = PendaftaranMentor::where('status',1)->get();
-        $pembayaran_trainer = PembayaranTrainer::all();
+        $pembayaran_trainer = PembayaranTrainer::with('mentor')->get();
         return view('admin.pembayaran_trainer',compact('pembayaran_trainer','mentor'));
     }
 
@@ -38,7 +38,7 @@ class PembayaranTrainerController extends Controller
 
     public function edit_pembayaran_trainer($id)
     {
-        $pembayaran_trainer = PembayaranTrainer::find($id);
+        $pembayaran_trainer = PembayaranTrainer::with('mentor')->find($id);
         return response()->json($pembayaran_trainer);
     }
 

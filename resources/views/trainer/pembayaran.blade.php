@@ -26,7 +26,7 @@
                   <th scope="col">Nama</th>
                   <th scope="col">Jenis Trainer</th>
                   <th scope="col">Tanggal Bulan Tahun</th>
-                  <th scope="col">Jumlah Potongan</th>
+                  {{-- <th scope="col">Jumlah Potongan</th> --}}
                   <th scope="col">Jumlah Pembayaran</th>
                   <th scope="col">Foto Pembayaran</th>
                   <th scope="col">Aksi</th>
@@ -38,9 +38,9 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$data->nik}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->mentor->nama_lengkap}}</td>
+                <td>{{$data->mentor->jenis_mentor}}</td>
                 <td>{{$data->tanggal}}</td>                
-                <td>{{ 'Rp. ' . number_format($data->jumlah_potongan, 0, ',', '.') }}</td>                
+                {{-- <td>{{ 'Rp. ' . number_format($data->jumlah_potongan, 0, ',', '.') }}</td>                 --}}
                 <td>{{ 'Rp. ' . number_format($data->jumlah_pembayaran, 0, ',', '.') }}</td>
                 <td><img src="{{asset($data->foto_pembayaran)}}" alt="" width="200px"></td>                
 
@@ -89,7 +89,7 @@
                     <input disabled required type="date" class="form-control" id="edit_tanggal">
                 </div>       
                 <div class="col-12">
-                    <label for="jenis_satuan_barang" class="form-label">Nama Trainer</label>
+                    <label for="jenis_satuan_barang" class="form-label">Jenis Trainer</label>
                     <input disabled required type="text" class="form-control" id="edit_jenis_trainer">
                 </div>                
                 {{-- <div class="col-12">
@@ -101,10 +101,10 @@
                         @endforeach
                     </select>
                 </div>                  --}}
-                <div class="col-12">
+                {{-- <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Potongan</label>
                     <input disabled required type="number" class="form-control" id="edit_jumlah_potongan">
-                </div>  
+                </div>   --}}
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Pembayaran</label>
                     <input disabled required type="number" class="form-control" id="edit_jumlah_pembayaran">
@@ -143,9 +143,9 @@
                 $('#edit_id').val(id);                    
                 $('#edit_nik').val(data.nik)
                 $('#edit_nama').val(data.nama)
-                $('#edit_jenis_trainer').val(data.jenis_trainer)                       
+                $('#edit_jenis_trainer').val(data.mentor.jenis_mentor)                       
                 $('#edit_tanggal').val(data.tanggal)                       
-                $('#edit_jumlah_potongan').val(data.jumlah_potongan)                       
+                // $('#edit_jumlah_potongan').val(data.jumlah_potongan)                       
                 $('#edit_jumlah_pembayaran').val(data.jumlah_pembayaran)                       
                 $('#edit_foto_pembayaran_tampil').attr('src', data.foto_pembayaran);                    
 

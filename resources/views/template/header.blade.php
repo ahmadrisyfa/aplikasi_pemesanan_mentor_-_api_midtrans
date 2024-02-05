@@ -129,6 +129,6 @@ https://templatemo.com/tm-568-digimedia
       </div>
     </div>
   </header>
-  <a href="https://wa.me/6285867770343" class="floating" target="_blank">
+  <a href="https://wa.me/6289660787591" class="floating" target="_blank">
     <i class="fa fa-whatsapp fab-icon"></i>
     </a>

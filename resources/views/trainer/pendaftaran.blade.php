@@ -15,7 +15,7 @@
     <div class="col-lg-12">
         <div class="card">
         <div class="card-body">
-            <form id="update">
+        <form id="update">
             <div class="col-12">
                     <input  type="hidden" value="{{$data->id}}" class="form-control" id="detail_pendaftaran_detail_id" name="detail_pendaftaran_detail_id">
                 <label for="nama_barang" class="form-label">Nama Lengkap</label>
@@ -76,9 +76,8 @@
                         <input  type="file" name="detail_pendaftaran_upload_foto" id="detail_pendaftaran_upload_foto" placeholder="Upload photo (max 1 mb)">
 
             </div>   
-            <div class="col-12">
+            {{-- <div class="col-12">
                 <label for="jenis_satuan_barang" class="form-label">Jenis Trainer</label> <br>
-                {{-- <input  type="text" class="form-control" id="detail_pendaftaran_jenis_mentor"> --}}
                 <label>
                     <input type="checkbox" style="width: 20px;" id="detail_pendaftaran_jenis_mentor[]" value="Trainer"> Trainer
                   </label>
@@ -96,7 +95,7 @@
                   <label>
                     <input type="checkbox" style="width: 20px;" id="detail_pendaftaran_jenis_mentor[]" value="Konselor & Hypnotherapist"> Konselor & Hypnotherapist
                   </label>
-            </div>   
+            </div>    --}}
             <div class="col-12">
                 <label for="jenis_satuan_barang" class="form-label">Rate Card</label>
                 <input  type="number" class="form-control" id="detail_pendaftaran_ratecard">
@@ -131,16 +130,16 @@
                 $('#detail_pendaftaran_portofolio_kegiatan').val(data.portofolio_kegiatan);
                 // $('#detail_pendaftaran_sertifikat_keahlian').attr('src', data.sertifikat_keahlian);
                 var containerForImages = $('#container_for_images');
-        containerForImages.empty(); // Kosongkan container untuk menghindari duplikasi
+                containerForImages.empty(); // Kosongkan container untuk menghindari duplikasi
 
-        if (Array.isArray(data.sertifikat_keahlian) && data.sertifikat_keahlian.length > 0) {
-            for (var i = 0; i < data.sertifikat_keahlian.length; i++) {
-                var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', data.sertifikat_keahlian[i]).addClass('sertifikat-image');
-                containerForImages.append(imgElement);
-            }
-        } else {
-            containerForImages.append('<p>Tidak ada sertifikat keahlian yang diunggah.</p>');
-        }
+                if (Array.isArray(data.sertifikat_keahlian) && data.sertifikat_keahlian.length > 0) {
+                    for (var i = 0; i < data.sertifikat_keahlian.length; i++) {
+                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', data.sertifikat_keahlian[i]).addClass('sertifikat-image');
+                        containerForImages.append(imgElement);
+                    }
+                } else {
+                    containerForImages.append('<p>Tidak ada sertifikat keahlian yang diunggah.</p>');
+                }
                 $('#detail_pendaftaran_cuplikan_vidio_profile_tampil').attr('src', data.cuplikan_vidio_profile);
                 $('#detail_pendaftaran_upload_foto_tampil').attr('src', data.upload_foto);
                 // $('#detail_pendaftaran_jenis_mentor').val(data.jenis_mentor);
@@ -191,9 +190,9 @@
     
         var sertifikatFiles = $("#detail_pendaftaran_sertifikat_keahlian")[0].files;
 
-for (var i = 0; i < sertifikatFiles.length; i++) {
-    formData.append("detail_pendaftaran_sertifikat_keahlian[]", sertifikatFiles[i]);
-}
+        for (var i = 0; i < sertifikatFiles.length; i++) {
+            formData.append("detail_pendaftaran_sertifikat_keahlian[]", sertifikatFiles[i]);
+        }
 
         formData.append("detail_pendaftaran_upload_foto", $("#detail_pendaftaran_upload_foto")[0].files[0]);
         formData.append("detail_pendaftaran_cuplikan_vidio_profile", $("#detail_pendaftaran_cuplikan_vidio_profile")[0].files[0]);

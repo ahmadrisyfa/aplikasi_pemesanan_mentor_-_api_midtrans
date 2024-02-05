@@ -30,7 +30,7 @@
                   </div>
                   <div class="col-lg-12">
                     <div class="border-first-button scroll-to-section">
-                      <a  href="https://wa.me/6285867770343" style="color: #7761b7">Konsultasi Sekarang!</a>
+                      <a  href="https://wa.me/6289660787591" style="color: #7761b7">Konsultasi Sekarang!</a>
                     </div>
                   </div>
                 </div>

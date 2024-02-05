@@ -39,7 +39,6 @@
                   <th scope="col">#</th>
                   <th scope="col">Nama</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Nama Trainer</th>            
                   <th scope="col">Aksi</th>
                   </tr>
               </thead>
@@ -49,7 +48,6 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$value->name}}</td>
                 <td>{{$value->email}}</td>
-                <td>{{$value->pendaftaranMentor->nama_lengkap}}</td>
                 <td>                                       
                   <button data-id="{{ $value->id }}"
                     class="delete btn btn-danger btn-sm">Hapus</button>
@@ -80,13 +78,13 @@
                     <select name="email" id="email" required class="form-control" onchange="updateInput()">
                         <option value="" disabled selected>-- Pilih Nama Trainer --</option>
                         @foreach ($pendaftaran_trainer as $value)
-                            <option value="{{$value->email}}">{{$value->nama_lengkap}}</option>    
+                            <option value="{{$value->email}}" data-nama="{{$value->nama_lengkap}}"  data-email="{{$value->email}}" >{{$value->nama_lengkap}}</option>    
                         @endforeach
                     </select>                        
                 </div>
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Nama</label>
-                    <input required  type="text" class="form-control" id="name" name="name">
+                    <input required readonly  type="text" class="form-control" id="name" name="name">
                 </div>                                                                                                    
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Email</label>
@@ -107,15 +105,19 @@
     </div>
   </div> 
   <script>
-    function updateInput() {
-        // Mendapatkan elemen select
-        var dropdown = document.getElementById("email");
-        
-        // Mendapatkan nilai yang dipilih
-        var selectedValue = dropdown.options[dropdown.selectedIndex].value;
-        
-        // Mengatur nilai input
-        document.getElementById("email_input").value = selectedValue;
+    function updateInput() {    
+
+
+
+        // get name
+        var selectedId = document.getElementById("email").value;
+        var selectedOption = document.querySelector(`#email option[value='${selectedId}']`);
+        var namaLengkap = selectedOption.getAttribute("data-nama");
+        var email_input = selectedOption.getAttribute("data-email");
+
+        document.getElementById("name").value = namaLengkap;
+        document.getElementById("email_input").value = email_input;
+
     }
 </script>
   

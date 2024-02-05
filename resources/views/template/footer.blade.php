@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-lg-12" >
           <p>Copyright © 2022 DigiMedia Co., Ltd. All Rights Reserved. 
-          <br>whatsApp: <a href="https://api.whatsapp.com/send/?phone=6285867770343&text&type=phone_number&app_absent=0" target="_blank" title="whatsApp"><i class="fa fa-whatsapp"></i> Klik Di Sini!</a></p>
+          <br>whatsApp: <a href="https://api.whatsapp.com/send/?phone=6289660787591&text&type=phone_number&app_absent=0" target="_blank" title="whatsApp"><i class="fa fa-whatsapp"></i> Klik Di Sini!</a></p>
         </div>
       </div>
     </div>

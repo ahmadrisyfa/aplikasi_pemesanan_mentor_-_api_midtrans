@@ -82,7 +82,7 @@ class TrainerDashboardController extends Controller
         $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
     }
     
-    $data->jenis_mentor = $request->detail_pendaftaran_jenis_mentor;
+    // $data->jenis_mentor = $request->detail_pendaftaran_jenis_mentor;
     $data->ratecard = $request->detail_pendaftaran_ratecard;
     $data->save();
 
@@ -108,7 +108,7 @@ class TrainerDashboardController extends Controller
     public function daftar_pembayaran()
     {
         $pembayaran = PembayaranTrainer::join('pendaftaran_mentor', 'pembayaran_trainer.jenis_trainer', '=', 'pendaftaran_mentor.id') 
-                ->select('pembayaran_trainer.*') // Pilih semua field dari pembayaran_trainer
+                ->select('pembayaran_trainer.*') 
                 ->where('pendaftaran_mentor.user_id', auth()->user()->id)
                 ->get();
 
@@ -118,7 +118,7 @@ class TrainerDashboardController extends Controller
 
     public function daftar_pembayaran_detail($id)
     {
-        $pembayaran = PembayaranTrainer::find($id);
+        $pembayaran = PembayaranTrainer::with('mentor')->find($id);
         return response()->json($pembayaran);
     }
 }

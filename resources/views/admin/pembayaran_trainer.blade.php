@@ -53,7 +53,7 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$data->nik}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->mentor->nama_lengkap}}</td>
+                <td>{{$data->mentor->jenis_mentor}}</td>
                 <td>{{$data->tanggal}}</td>                
                 <td>{{ 'Rp. ' . number_format($data->jumlah_potongan, 0, ',', '.') }}</td>                
                 <td>{{ 'Rp. ' . number_format($data->jumlah_pembayaran, 0, ',', '.') }}</td>
@@ -91,24 +91,26 @@
                 @csrf           
                 <div class="col-12">
                     <label for="nama_barang" class="form-label">Nik</label>
-                    <input required  type="number" class="form-control" id="nik">
+                    <select required id="nik" class="form-select" onchange="get_create()">
+                        <option selected disabled style="text-align: center" value="">--- Nik ---</option>                    
+                        @foreach ($mentor as $data_mentor)                            
+                            <option value="{{$data_mentor->nik}}" data-nama="{{$data_mentor->nama_lengkap}}"  data-id="{{$data_mentor->id}}" data-jenis="{{$data_mentor->jenis_mentor}}">{{$data_mentor->nik}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Nama</label>
-                    <input required  type="text" class="form-control" id="nama">
+                    <input required readonly type="text" class="form-control" id="nama">
                 </div>                                                                                                    
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Tanggal</label>
                     <input required type="date" class="form-control" id="tanggal">
                 </div>                  
                 <div class="col-12">
-                    <label for="jenis_satuan_barang" class="form-label">Jenis</label>
-                    <select required id="jenis_trainer" class="form-select">
-                        <option selected disabled style="text-align: center" value="">--- Jenis Mentor ---</option>                    
-                        @foreach ($mentor as $data_mentor)                            
-                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama_lengkap}}</option>
-                        @endforeach
-                    </select>
+                    <label for="jenis_satuan_barang" class="form-label">Jenis Trainer</label>
+                    <input required readonly type="text" class="form-control" id="jenis_trainer_mentor">                
+                    <input required readonly type="hidden" class="form-control" id="jenis_trainer">                
+
                 </div>                 
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Potongan</label>
@@ -133,6 +135,21 @@
     </div>
   </div> 
 
+  <script>
+    function get_create() {
+        var selectedId = document.getElementById("nik").value;
+        var selectedOption = document.querySelector(`#nik option[value='${selectedId}']`);
+
+        var namaLengkap = selectedOption.getAttribute("data-nama");
+        var jenisMentor = selectedOption.getAttribute("data-jenis");
+        var id = selectedOption.getAttribute("data-id");
+
+        document.getElementById("nama").value = namaLengkap;
+        document.getElementById("jenis_trainer").value = id;
+        document.getElementById("jenis_trainer_mentor").value = jenisMentor;
+    }
+</script>
+
   <div class="modal fade" id="EditModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -145,26 +162,26 @@
                 @csrf                        
                 <div class="col-12">
                     <label for="nama_barang" class="form-label">Nik</label>
-                    <input required  type="number" class="form-control" id="edit_nik">
                     <input required  type="hidden" class="form-control" id="edit_id">
-                    
+                    <select required id="edit_nik" class="form-select" onchange="get_edit()">
+                        <option selected disabled style="text-align: center" value="">--- Nik ---</option>                    
+                        @foreach ($mentor as $data_mentor)                            
+                        <option value="{{$data_mentor->nik}}" data-nama="{{$data_mentor->nama_lengkap}}"  data-id="{{$data_mentor->id}}" data-jenis="{{$data_mentor->jenis_mentor}}">{{$data_mentor->nik}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Nama</label>
-                    <input required  type="text" class="form-control" id="edit_nama">
+                    <input required  type="text" readonly class="form-control" id="edit_nama">
                 </div>                                                                                                    
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Tanggal</label>
                     <input required type="date" class="form-control" id="edit_tanggal">
                 </div>                  
                 <div class="col-12">
-                    <label for="jenis_satuan_barang" class="form-label">Jenis</label>
-                    <select required id="edit_jenis_trainer" class="form-select">
-                        <option selected disabled style="text-align: center" value="">--- Jenis Mentor ---</option>                    
-                        @foreach ($mentor as $data_mentor)                            
-                        <option value="{{$data_mentor->id}}">{{$data_mentor->nama_lengkap}}</option>
-                        @endforeach
-                    </select>
+                    <label for="jenis_satuan_barang" class="form-label">Jenis Trainer</label>
+                    <input required  type="text" readonly class="form-control" id="edit_jenis_trainer_tampil">
+                        <input required  type="hidden" readonly class="form-control" id="edit_jenis_trainer">
                 </div>                 
                 <div class="col-12">
                     <label for="jenis_satuan_barang" class="form-label">Jumlah Potongan</label>
@@ -179,7 +196,7 @@
                     <br>
                     <img id="edit_foto_pembayaran_tampil" src="" alt="Uploaded Foto" style="max-width: 300px; max-height: 300px;">   
                     <br>                         
-                    <input required type="file" class="form-control" id="edit_foto_pembayaran">
+                    <input type="file" class="form-control" id="edit_foto_pembayaran">
                 </div> 
         </div>
         <div class="modal-footer">
@@ -191,7 +208,20 @@
     </div>
     </div>
   </div>
-  
+  <script>
+    function get_edit() {
+        var selectedId = document.getElementById("edit_nik").value;
+        var selectedOption = document.querySelector(`#edit_nik option[value='${selectedId}']`);
+
+        var namaLengkap = selectedOption.getAttribute("data-nama");
+        var jenisMentor = selectedOption.getAttribute("data-jenis");
+        var id = selectedOption.getAttribute("data-id");
+
+        document.getElementById("edit_nama").value = namaLengkap;
+        document.getElementById("edit_jenis_trainer").value = id;
+        document.getElementById("edit_jenis_trainer_tampil").value = jenisMentor;
+    }
+  </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
@@ -237,7 +267,8 @@
                 $('#edit_nik').val(data.nik)
                 $('#edit_nama').val(data.nama)
                 $('#edit_jenis_trainer').val(data.jenis_trainer)                       
-                $('#edit_tanggal').val(data.tanggal)                       
+                $('#edit_jenis_trainer_tampil').val(data.mentor.jenis_mentor)                       
+                $('#edit_tanggal').val(data.tanggal)                            
                 $('#edit_jumlah_potongan').val(data.jumlah_potongan)                       
                 $('#edit_jumlah_pembayaran').val(data.jumlah_pembayaran)   
                 $('#edit_foto_pembayaran_tampil').attr('src', data.foto_pembayaran);                    
@@ -258,7 +289,7 @@
         formData.append("nik", $("#edit_nik").val());
         formData.append("nama", $("#edit_nama").val());
         formData.append("jenis_trainer", $("#edit_jenis_trainer").val());
-        formData.append("tanggal", $("#edit_tanggal").val());
+        formData.append("tanggal", $("#edit_tanggal").val());        
         formData.append("jumlah_potongan", $("#edit_jumlah_potongan").val());
         formData.append("jumlah_pembayaran", $("#edit_jumlah_pembayaran").val());    
         formData.append("foto_pembayaran", $("#edit_foto_pembayaran")[0].files[0]); 
@@ -299,5 +330,6 @@
                     });
             }
     });
+    
 </script>
 @endsection
