@@ -33,9 +33,9 @@ Route::get('/logout',[App\Http\Controllers\LoginController::class,'logout']);
 
 Route::post('/daftar_mentor/create',[App\Http\Controllers\MentorController::class,'create']);
 Route::get('pemesanan_mentor/{id}/detail',[App\Http\Controllers\MentorController::class,'pemesanan_mentor_detail']);
-Route::post('pemesanan_mentor/store',[App\Http\Controllers\MentorController::class,'pemesanan_mentor_store']);
 Route::get('pemesanan_mentor/{id}',[App\Http\Controllers\MentorController::class,'pemesanan_mentor']);
-
+Route::post('pemesanan_mentor/store/{id}',[App\Http\Controllers\MentorController::class,'pemesanan_mentor_store']);
+Route::get('update/status/{id}',[App\Http\Controllers\MentorController::class,'update_status_email']);
 
 
 Route::get('pembatalan',[App\Http\Controllers\PembatalanController::class,'index']);
@@ -77,6 +77,7 @@ Route::get('tambah_mentor_admin_edit/{id}',[App\Http\Controllers\MentorControlle
 
 Route::get('admin/pemesanan',[App\Http\Controllers\PemesananController::class,'index']);
 Route::get('pemesanan_delete/{id}',[App\Http\Controllers\PemesananController::class,'pemesanan_delete']);
+Route::post('pemesanan_create',[App\Http\Controllers\PemesananController::class,'pemesanan_create']);
 Route::get('pemesanan_edit/{id}',[App\Http\Controllers\PemesananController::class,'pemesanan_edit']);
 Route::post('pemesanan_update/{id}',[App\Http\Controllers\PemesananController::class,'pemesanan_update']);
 Route::get('pemesanan_cetak',[App\Http\Controllers\PemesananController::class,'cetak']);

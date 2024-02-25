@@ -29,7 +29,7 @@ class PembayaranTrainerController extends Controller
 
         $foto = $request->file('foto_pembayaran');
         $pathFoto = $foto->store('public/foto-pembayaran'); 
-        $data->foto_pembayaran = asset('storage/' . str_replace('public/', '', $pathFoto));
+        $data->foto_pembayaran = $pathFoto;
 
         $data->save();
 
@@ -60,7 +60,7 @@ class PembayaranTrainerController extends Controller
 
             $foto_update = $request->file('foto_pembayaran');
             $pathFoto = $foto_update->store('public/foto-pembayaran'); 
-            $pembayaran_trainer->foto_pembayaran = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $pembayaran_trainer->foto_pembayaran =  $pathFoto;
         }
         $pembayaran_trainer->save();    
         return response()->json(['message' => 'Data updated successfully']);

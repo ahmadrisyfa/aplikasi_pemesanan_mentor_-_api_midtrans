@@ -21,7 +21,7 @@
           
 
           <div class="card-body">
-            <h5 class="card-title">Total Pendaftaran Mentor </h5>
+            <h5 class="card-title">Total Pendaftaran Trainer </h5>
 
             <div class="d-flex align-items-center">
               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -43,7 +43,7 @@
           
 
           <div class="card-body">
-            <h5 class="card-title">Daftar Mentor</h5>
+            <h5 class="card-title">Daftar Trainer</h5>
 
             <div class="d-flex align-items-center">
               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

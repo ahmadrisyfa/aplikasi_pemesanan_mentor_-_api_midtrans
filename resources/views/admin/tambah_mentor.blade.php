@@ -23,8 +23,9 @@
                   <th scope="col">Nama Lengkap</th>
                   <th scope="col">pendidikan</th>
                   <th scope="col">Jenis Trainer</th>          
-                  <th scope="col">Ratecard</th>    
-                  <th scope="col">Accept</th>
+                  <th scope="col">Tarif</th>    
+                  <th scope="col">Terima</th>
+                  <th scope="col">Status Email</th>
                   <th scope="col">Aksi</th>
                   </tr>
               </thead>
@@ -35,13 +36,22 @@
                   <td>{{$value->nama_lengkap}}</td>
                   <td>{{$value->pendidikan}}</td>
                   <td>{{$value->jenis_mentor}}</td>
-                  <td>{{$value->ratecard}}</td>  
+                  <td>{{ 'Rp. ' . number_format($value->tarif, 0, ',', '.') }}</td>
+
                   <td>
                   <button  data-id="{{ $value->id }}"
-                    class="accept_pendaftaran_mentor btn btn-success">Accept</button>
+                    class="accept_pendaftaran_mentor btn btn-success">Terima</button>
                   
                   <button  data-id="{{ $value->id }}"
-                    class="delete_pendaftaran_mentor btn btn-danger">Non Accept</button>
+                    class="delete_pendaftaran_mentor btn btn-danger">Tidak Terima</button>
+                  </td>
+                  <td>
+                    @if($value->status == 2)
+                    <span class="btn btn-danger">Tidak Aktif</span>
+                    @else
+                    <span class="btn btn-success">Aktif</span>
+                    @endif
+
                   </td>
                   <td>
                     <button type="button" class="btn btn-primary btn-sm detail-pendaftaran-button"
@@ -96,7 +106,6 @@
                             <div class="col-12">
                                 <label for="jenis_satuan_barang" class="form-label">Sertifikat Keahlian</label> <br>
                                 {{-- <input disabled type="text" class="form-control" id="detail_pendaftaran_sertifikat_keahlian"> --}}
-                                {{-- <img id="detail_pendaftaran_sertifikat_keahlian" src="" alt="Uploaded Sertifikat Keahlian" style="max-width: 300px; max-height: 300px;">                             --}}
                                 
                                 <div id="detail_gambar_sertifikat" ></div>
                             </div>   
@@ -123,8 +132,8 @@
                                 <input disabled type="text" class="form-control" id="detail_pendaftaran_jenis_mentor">
                             </div>   
                             <div class="col-12">
-                                <label for="jenis_satuan_barang" class="form-label">Rate Card</label>
-                                <input disabled type="text" class="form-control" id="detail_pendaftaran_ratecard">
+                                <label for="jenis_satuan_barang" class="form-label">Tarif</label>
+                                <input disabled type="text" class="form-control" id="detail_pendaftaran_tarif">
                             </div>   
                                                                                     
         
@@ -160,7 +169,7 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$data->nama_lengkap}}</td>
                 {{-- <td>{{$data->harga}}</td> --}}
-                <td>{{ 'Rp. ' . number_format($data->ratecard, 0, ',', '.') }}</td>
+                <td>{{ 'Rp. ' . number_format($data->tarif, 0, ',', '.') }}</td>
 
                 <td>{{$data->jenis_mentor}}</td>
                 <td>
@@ -267,8 +276,8 @@
                             </label>
                         </div>   
                         <div class="col-12">
-                            <label for="jenis_satuan_barang" class="form-label">Rate Card</label>
-                            <input  type="number" class="form-control" id="ratecard">
+                            <label for="jenis_satuan_barang" class="form-label">Tarif</label>
+                            <input  type="number" class="form-control" id="tarif">
                         </div>   
                         <div class="col-12 mt-2">
                         <button type="reset" class="btn btn-primary">Reset</button>            
@@ -375,8 +384,8 @@
                       </label>
                 </div>   
                 <div class="col-12">
-                    <label for="jenis_satuan_barang" class="form-label">Rate Card</label>
-                    <input  type="number" class="form-control" id="edit_pendaftaran_ratecard">
+                    <label for="jenis_satuan_barang" class="form-label">Tarif</label>
+                    <input  type="number" class="form-control" id="edit_pendaftaran_tarif">
                 </div>   
                 <div class="col-12 mt-2">
                   <button type="reset" class="btn btn-primary">Reset</button>            
@@ -417,7 +426,7 @@
 
         formData.append("jenis_mentor", selectedMentorTypes);
 
-        formData.append("ratecard", $("#ratecard").val());
+        formData.append("tarif", $("#tarif").val());
         
       
         // formData.append("sertifikat_keahlian", $("#sertifikat_keahlian")[0].files[0]);
@@ -468,20 +477,19 @@
                 $('#edit_pendaftaran_pendidikan_non_akademik').val(data.pendidikan_non_akademik);
                 $('#edit_pendaftaran_keahlian').val(data.keahlian);
                 $('#edit_pendaftaran_portofolio_kegiatan').val(data.portofolio_kegiatan);
-                // $('#edit_pendaftaran_sertifikat_keahlian').attr('src', data.sertifikat_keahlian);
                 var containerForImages = $('#container_for_images');
                 containerForImages.empty(); // Kosongkan container untuk menghindari duplikasi
 
                 if (Array.isArray(data.sertifikat_keahlian) && data.sertifikat_keahlian.length > 0) {
                     for (var i = 0; i < data.sertifikat_keahlian.length; i++) {
-                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', data.sertifikat_keahlian[i]).addClass('sertifikat-image');
+                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', '<?= asset('storage') ?>/' + data.sertifikat_keahlian[i]).addClass('sertifikat-image');
                         containerForImages.append(imgElement);
                     }
                 } else {
                     containerForImages.append('<p>Tidak ada sertifikat keahlian yang diunggah.</p>');
                 }
-                $('#edit_pendaftaran_cuplikan_vidio_profile_tampil').attr('src', data.cuplikan_vidio_profile);
-                $('#edit_pendaftaran_upload_foto_tampil').attr('src', data.upload_foto);
+                $('#edit_pendaftaran_cuplikan_vidio_profile_tampil').attr('src', '<?= asset('storage') ?>/' + data.cuplikan_vidio_profile);
+                $('#edit_pendaftaran_upload_foto_tampil').attr('src', '<?= asset('storage') ?>/' + data.upload_foto);
                 // $('#edit_pendaftaran_jenis_mentor').val(data.jenis_mentor);
                 var jenisMentorValues = data.jenis_mentor;
                 $('input[id="edit_pendaftaran_jenis_mentor[]"]').each(function() {
@@ -493,7 +501,7 @@
                         $(this).prop('checked', false);
                     }
                 });
-                $('#edit_pendaftaran_ratecard').val(data.ratecard);
+                $('#edit_pendaftaran_tarif').val(data.tarif);
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
@@ -524,7 +532,7 @@
 
         formData.append("edit_pendaftaran_jenis_mentor", selectedMentorTypes);
 
-        formData.append("edit_pendaftaran_ratecard", $("#edit_pendaftaran_ratecard").val());
+        formData.append("edit_pendaftaran_tarif", $("#edit_pendaftaran_tarif").val());
         
       
     
@@ -577,22 +585,21 @@
                 $('#detail_pendaftaran_pendidikan_non_akademik').val(data.pendidikan_non_akademik);
                 $('#detail_pendaftaran_keahlian').val(data.keahlian);
                 $('#detail_pendaftaran_portofolio_kegiatan').val(data.portofolio_kegiatan);
-                // $('#detail_pendaftaran_sertifikat_keahlian').attr('src', data.sertifikat_keahlian);
                 var containerForImages = $('#detail_gambar_sertifikat');
                 containerForImages.empty(); // Kosongkan container untuk menghindari duplikasi
 
                 if (Array.isArray(data.sertifikat_keahlian) && data.sertifikat_keahlian.length > 0) {
                     for (var i = 0; i < data.sertifikat_keahlian.length; i++) {
-                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', data.sertifikat_keahlian[i]).addClass('sertifikat-image');
+                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', '<?= asset('storage') ?>/' + data.sertifikat_keahlian[i]).addClass('sertifikat-image');
                         containerForImages.append(imgElement);
                     }
                 } else {
                     containerForImages.append('<p>Tidak ada sertifikat keahlian yang diunggah.</p>');
                 }
-                $('#detail_pendaftaran_cuplikan_vidio_profile').attr('src', data.cuplikan_vidio_profile);
-                $('#detail_pendaftaran_upload_foto').attr('src', data.upload_foto);
+                $('#detail_pendaftaran_cuplikan_vidio_profile').attr('src', '<?= asset('storage') ?>/' + data.cuplikan_vidio_profile);
+                $('#detail_pendaftaran_upload_foto').attr('src', '<?= asset('storage') ?>/' + data.upload_foto);
                 $('#detail_pendaftaran_jenis_mentor').val(data.jenis_mentor);
-                $('#detail_pendaftaran_ratecard').val(data.ratecard);
+                $('#detail_pendaftaran_tarif').val(data.tarif);
             },
             error: function(xhr) {
                 console.log(xhr.responseText);

@@ -5,8 +5,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Detail Category mentor {{$category}} </h6>
-            <h4>Plih Mentor Anda Jenis Mentor ({{$category}})</em></h4>
+            <h6>Detail Category Trainer {{$category}} </h6>
+            <h4>Plih Trainer Anda Jenis Trainer ({{$category}})</em></h4>
           <form class="form-inline d-flex align-items-center" action="{{ url('jenis_mentor/'.$category) }}" method="post">
             @csrf
             <input class="form-control" type="search" name="search" placeholder="Search Alamat Mentor" value="{{ request('search') }}">
@@ -26,7 +26,7 @@
                             <a href="{{url('pemesanan_mentor/'.$data_mentor->id.'/detail')}}">
                                 <div class="portfolio-item">
                                     <div class="thumb">
-                                        <img src="{{$data_mentor->upload_foto}}" alt="">
+                                        <img src="{{asset('storage/'.$data_mentor->upload_foto)}}" alt="">
                                     </div>
                                     <div class="down-content">
                                         <h4>{{$data_mentor->nama_lengkap}}</h4>
@@ -39,7 +39,7 @@
                 @endforeach
             @else
                 <div class="col-sm-12">
-                    <h5 style="text-align: center">Tidak Ada Data Mentor Dengan Alamat Tersebut.</h5>
+                    <h5 style="text-align: center">Tidak Ada Data Trainer Dengan Alamat Tersebut.</h5>
                 </div>
             @endif
         </div>

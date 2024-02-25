@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2024 at 10:24 AM
+-- Generation Time: Feb 23, 2024 at 01:50 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -60,8 +60,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_11_15_145939_create_pendaftaran_mentor_table', 1),
 (6, '2023_11_15_150114_create_pemesanan_table', 1),
-(7, '2023_11_22_143029_create_pembatalan_table', 1),
-(8, '2024_01_18_190042_create_pembayaran_trainer_table', 1);
+(7, '2024_01_18_190042_create_pembayaran_trainer_table', 1);
 
 -- --------------------------------------------------------
 
@@ -78,27 +77,6 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembatalan`
---
-
-CREATE TABLE `pembatalan` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instansi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alamat_instansi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lokasi_kegiatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tanggal_kegiatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jam` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jumlah_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alasan_pembatalan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pembayaran_trainer`
 --
 
@@ -106,7 +84,7 @@ CREATE TABLE `pembayaran_trainer` (
   `id` bigint UNSIGNED NOT NULL,
   `nik` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jenis_trainer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_trainer` bigint UNSIGNED NOT NULL,
   `tanggal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah_potongan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -123,7 +101,7 @@ CREATE TABLE `pembayaran_trainer` (
 
 CREATE TABLE `pemesanan` (
   `id` bigint UNSIGNED NOT NULL,
-  `mentor_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mentor_id` bigint UNSIGNED DEFAULT NULL,
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instansi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `alamat_instansi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -147,7 +125,7 @@ CREATE TABLE `pemesanan` (
 
 CREATE TABLE `pendaftaran_mentor` (
   `id` bigint UNSIGNED NOT NULL,
-  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
   `nama_lengkap` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ttl` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nik` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -161,7 +139,7 @@ CREATE TABLE `pendaftaran_mentor` (
   `cuplikan_vidio_profile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `upload_foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jenis_mentor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ratecard` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tarif` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -208,8 +186,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `is_admin`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', '1', 'admin1@gmail.com', NULL, '$2y$10$7C9PQrp1iTd5ajsYTs.HMuWeyi3xbIEpmogL30maVWIn.XOX8Cu.i', NULL, NULL, NULL),
-(2, 'Admin', '1', 'Admin2@gmail.com', NULL, '$2y$10$tTYdYa207exPp.4jP0XRcuiPkQhSPb2awfMfbyeE0cARydLi.dWqa', NULL, NULL, NULL);
+(1, 'Admin', '1', 'admin1@gmail.com', NULL, '$2y$10$OEICJUNDFSBAlLF8Bj.fIOPUxc9oOWzzR2h3MePy1CN5MsG4jKAFG', NULL, NULL, NULL),
+(2, 'Admin', '1', 'Admin2@gmail.com', NULL, '$2y$10$BthJ/DmnW9o3oTDrkJHmHemtM1NQH15sLUCvtDiZG4KC81TXkipUu', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -235,28 +213,25 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `pembatalan`
---
-ALTER TABLE `pembatalan`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `pembayaran_trainer`
 --
 ALTER TABLE `pembayaran_trainer`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pembayaran_trainer_jenis_trainer_foreign` (`jenis_trainer`);
 
 --
 -- Indexes for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pemesanan_mentor_id_foreign` (`mentor_id`);
 
 --
 -- Indexes for table `pendaftaran_mentor`
 --
 ALTER TABLE `pendaftaran_mentor`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pendaftaran_mentor_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -287,13 +262,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `pembatalan`
---
-ALTER TABLE `pembatalan`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_trainer`
@@ -324,6 +293,28 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pembayaran_trainer`
+--
+ALTER TABLE `pembayaran_trainer`
+  ADD CONSTRAINT `pembayaran_trainer_jenis_trainer_foreign` FOREIGN KEY (`jenis_trainer`) REFERENCES `pendaftaran_mentor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  ADD CONSTRAINT `pemesanan_mentor_id_foreign` FOREIGN KEY (`mentor_id`) REFERENCES `pendaftaran_mentor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pendaftaran_mentor`
+--
+ALTER TABLE `pendaftaran_mentor`
+  ADD CONSTRAINT `pendaftaran_mentor_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

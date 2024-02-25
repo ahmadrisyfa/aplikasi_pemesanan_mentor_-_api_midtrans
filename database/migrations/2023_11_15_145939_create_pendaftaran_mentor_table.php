@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pendaftaran_mentor', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();        
             $table->string('nama_lengkap')->nullable();
             $table->string('ttl')->nullable();
             $table->string('nik')->nullable();
@@ -29,9 +29,14 @@ return new class extends Migration
             $table->string('cuplikan_vidio_profile')->nullable();
             $table->string('upload_foto')->nullable();
             $table->string('jenis_mentor')->nullable();
-            $table->string('ratecard')->nullable();
+            $table->string('tarif')->nullable();
             $table->string('status')->nullable()->default('0');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

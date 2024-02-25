@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
-            $table->string('mentor_id')->nullable();            
+            $table->unsignedBigInteger('mentor_id')->nullable();  
             $table->string('nama')->nullable();
             $table->string('instansi')->nullable();
             $table->string('alamat_instansi')->nullable();
@@ -26,10 +26,14 @@ return new class extends Migration
             $table->string('kendala_yang_di_alami')->nullable();
             $table->string('harapan_dari_adanya_kegiatan')->nullable();
             $table->string('jumlah_pembayaran')->nullable();
-            $table->string('bayar')->nullable()->default(0);
-
-
+            $table->string('bayar')->nullable()->default(0);                    
             $table->timestamps();
+
+            
+            $table->foreign('mentor_id')
+                    ->references('id')->on('pendaftaran_mentor')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');          
         });
     }
 

@@ -23,7 +23,7 @@
 
                           <div class="col-lg-6 offset-lg-3" style="text-align: center">
                             <div class="section-heading">
-                              <h6>Pembayaran Pemesanan Mentor</h6>
+                              <h6>Pembayaran Layanan</h6>
                               {{-- <a href="{{url('invoice/'.$data->id)}}" target="_blank" class="btn btn-info main-button" style="text-align: center">Cetak Pemesanan</a> --}}
 
                               <button  id="pay-button" class="btn btn-success main-button" style="text-align: center">Bayar</button>

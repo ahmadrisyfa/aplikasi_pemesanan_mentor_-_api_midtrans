@@ -160,41 +160,41 @@
     });
 
     $("#EditForm").submit(function(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    var id = $('#detail_admin_id').val();
+        var id = $('#detail_admin_id').val();
+        
+        var formData = new FormData();
+        formData.append("_token", "{{ csrf_token() }}");
+        formData.append("nama", $("#nama").val());
+        formData.append("instansi", $("#instansi").val());
+        formData.append("alamat_instansi", $("#alamat_instansi").val());
+        formData.append("lokasi_kegiatan", $("#lokasi_kegiatan").val());
+        formData.append("tanggal_kegiatan", $("#tanggal_kegiatan").val());
+        formData.append("jam", $("#jam").val());
+        formData.append("no_hp", $("#no_hp").val());
+        formData.append("alasan_pembatalan", $("#alasan_pembatalan").val());
+        formData.append("jumlah_pembayaran", $("#jumlah_pembayaran").val());
+        // formData.append("harapan_dari_adanya_kegiatan", $("#harapan_dari_adanya_kegiatan").val());
+        // formData.append("bayar", $("#bayar").val());
+
     
-    var formData = new FormData();
-    formData.append("_token", "{{ csrf_token() }}");
-    formData.append("nama", $("#nama").val());
-    formData.append("instansi", $("#instansi").val());
-    formData.append("alamat_instansi", $("#alamat_instansi").val());
-    formData.append("lokasi_kegiatan", $("#lokasi_kegiatan").val());
-    formData.append("tanggal_kegiatan", $("#tanggal_kegiatan").val());
-    formData.append("jam", $("#jam").val());
-    formData.append("no_hp", $("#no_hp").val());
-    formData.append("alasan_pembatalan", $("#alasan_pembatalan").val());
-    formData.append("jumlah_pembayaran", $("#jumlah_pembayaran").val());
-    // formData.append("harapan_dari_adanya_kegiatan", $("#harapan_dari_adanya_kegiatan").val());
-    // formData.append("bayar", $("#bayar").val());
 
-    
-
-    $.ajax({
-        url: '{{ url('pembatalan_update') }}/' + id,
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            alert(response.message);
-            location.reload();
-        },
-        error: function(xhr) {
-            console.log(xhr.responseText);
-        }
+        $.ajax({
+            url: '{{ url('pembatalan_update') }}/' + id,
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                alert(response.message);
+                location.reload();
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
     });
-});
 
     
 

@@ -51,7 +51,7 @@ class TrainerDashboardController extends Controller
         $sertifikat_keahlianPaths = [];
         foreach ($request->file('detail_pendaftaran_sertifikat_keahlian') as $file) {
             $pathFoto = $file->store('public/foto_sertifikat');
-            $sertifikat_keahlianPaths[] = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $sertifikat_keahlianPaths[] =  $pathFoto;
         }
         $data->sertifikat_keahlian = $sertifikat_keahlianPaths;
     }
@@ -66,7 +66,7 @@ class TrainerDashboardController extends Controller
     if ($request->hasFile('detail_pendaftaran_upload_foto')) {
         $foto = $request->file('detail_pendaftaran_upload_foto');
         $pathFoto = $foto->store('public/foto');
-        $data->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
+        $data->upload_foto =  $pathFoto;
     }
     
     // Menghapus video sebelumnya
@@ -79,11 +79,11 @@ class TrainerDashboardController extends Controller
     if ($request->hasFile('detail_pendaftaran_cuplikan_vidio_profile')) {
         $video = $request->file('detail_pendaftaran_cuplikan_vidio_profile');
         $pathVideo = $video->store('public/video');
-        $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+        $data->cuplikan_vidio_profile =  $pathVideo;
     }
     
     // $data->jenis_mentor = $request->detail_pendaftaran_jenis_mentor;
-    $data->ratecard = $request->detail_pendaftaran_ratecard;
+    $data->tarif = $request->detail_pendaftaran_tarif;
     $data->save();
 
     return response()->json(['message' => 'Data updated successfully']);

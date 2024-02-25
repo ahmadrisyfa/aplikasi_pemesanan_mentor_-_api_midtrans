@@ -308,8 +308,8 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Pilih mentor</h6>
-            <h4>Silahkan Plih Jenis Mentor Anda</em></h4>
+            <h6>Pilih Trainer</h6>
+            <h4>Silahkan Plih Jenis Trainer Anda</em></h4>
             <div class="line-dec"></div>
           </div>
         </div>
@@ -323,7 +323,7 @@
               <a href="{{url('jenis_mentor/Trainer')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{asset('template')}}/assets/images/portfolio-01.jpg" alt="">
+                  <img src="{{asset('template')}}/assets/images/trainer.jpg" alt="">
                 </div>
                 <div class="down-content">
                   <h4>Trainer</h4>
@@ -336,7 +336,7 @@
               <a href="{{url('jenis_mentor/Motivator')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{asset('template')}}/assets/images/portfolio-01.jpg" alt="">
+                  <img src="{{asset('template')}}/assets/images/motivator.jpg" alt="">
                 </div>
                 <div class="down-content">
                   <h4>Motivator</h4>
@@ -349,7 +349,7 @@
               <a href="{{url('jenis_mentor/Konselor & Hypnotherapist')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{asset('template')}}/assets/images/portfolio-02.jpg" alt="">
+                  <img src="{{asset('template')}}/assets/images/konselor.jpg" alt="">
                 </div>
                 <div class="down-content">
                   <h4>Konselor & Hypnotherapist</h4>
@@ -362,7 +362,7 @@
               <a href="{{url('jenis_mentor/Psikolog')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{asset('template')}}/assets/images/portfolio-03.jpg" alt="">
+                  <img src="{{asset('template')}}/assets/images/psikolog.jpg" alt="">
                 </div>
                 <div class="down-content">
                   <h4>Psikolog</h4>
@@ -375,7 +375,7 @@
               <a href="{{url('jenis_mentor/Coach')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{asset('template')}}/assets/images/portfolio-04.jpg" alt="">
+                  <img src="{{asset('template')}}/assets/images/coach.jpg" alt="">
                 </div>
                 <div class="down-content">
                   <h4>Coach</h4>
@@ -648,8 +648,8 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Daftar mentor</h6>
-            <h4>Silahkan Plih Mentor Anda</em></h4>
+            <h6>Daftar Trainer</h6>
+            <h4>Silahkan Plih Trainer Anda</em></h4>
             <div class="line-dec"></div>
           </div>
         </div>
@@ -665,7 +665,7 @@
               <a href="{{url('pemesanan_mentor/'.$data_mentor->id.'/detail')}}">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{{$data_mentor->upload_foto}}" style="width: 180px;height:150px" alt="">
+                  <img src="{{asset('storage/'.$data_mentor->upload_foto)}}" style="width: 180px;height:150px" alt="">
                 </div>
                 <div class="down-content">
                   <h4>{{$data_mentor->nama_lengkap}}</h4>
@@ -677,6 +677,188 @@
               </a>  
             </div>
             @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="pendaftaran_trainer" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h6>Pendaftaran</h6>
+            <h4>Pendaftaran Trainer</h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="naccs">
+            <div class="grid">
+              <div class="row">
+                {{-- <div class="col-lg-12">
+                  <div class="menu">
+                    <div class="first-thumb">
+                      <div class="thumb">
+                        <span class="icon"><img src="{{asset('template')}}/assets/images/service-icon-01.png" alt=""></span>
+                        terapi
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">                 
+                        <span class="icon"><img src="{{asset('template')}}/assets/images/service-icon-02.png" alt=""></span>
+                        Konsultasi
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">                 
+                        <span class="icon"><img src="{{asset('template')}}/assets/images/service-icon-03.png" alt=""></span>
+                        coaching
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">                 
+                        <span class="icon"><img src="{{asset('template')}}/assets/images/service-icon-04.png" alt=""></span>
+                        training
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>  --}}
+                <div class="col-lg-12">
+                  <ul class="nacc">
+                    <li class="active">
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">                                
+                                  <h4>persyaratan pendaftaran :</h4>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i>Memiliki pendidikan minimal sarjana (S1) atau setara dalam bidang yang relevan.</span>
+                                  <span><i class="fa fa-check"></i>Pengalaman sebelumnya sebagai trainer lebih diutamakan.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Kemampuan komunikasi yang baik dan mampu menyampaikan materi secara jelas dan mudah dipahami.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Memiliki keterampilan dalam merancang dan menyusun materi pelatihan yang efektif.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Mampu beradaptasi dengan peserta pelatihan dari berbagai latar belakang.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Bersedia untuk memberikan pelatihan sesuai jadwal yang telah ditentukan.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Fleksibilitas dalam melakukan perjalanan jika diperlukan untuk memberikan pelatihan di lokasi yang berbeda.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Memiliki sertifikasi atau pelatihan terkait bidang yang akan diajarkan.</span>                                                                  
+                                </div>
+                                  <h4>Untuk mendaftar, ikuti langkah-langkah berikut:</h4>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i>Membuka halaman pendaftaran yang berada di bawah ini</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Pastikan untuk melengkapi semua bagian formulir pendaftaran dengan informasi yang relevan dan akurat.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Setelah selesai mendaftar, harap periksa email anda dan konfirmasi pendaftaran Anda untuk menerima pemberitahuan selanjutnya.</span>                                                                  
+                                  <span><i class="fa fa-check"></i>Anda akan menerima konfirmasi paling lambat dalam waktu 3 hari. Jika pendaftaran Anda diterima, anda akan mendapatkan pemberitahuan melalui email.</span>                                                                  
+                                </div>
+                                {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p> --}}
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="{{asset('template')}}/assets/images/services-image.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>Healthy Food &amp; Life</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
+                                  dover lipsum lorem and the others.</p>
+                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
+                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="{{asset('template')}}/assets/images/services-image-02.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>Car Re-search &amp; Transport</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
+                                  dover lipsum lorem and the others.</p>
+                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
+                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="{{asset('template')}}/assets/images/services-image-03.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>Online Shopping &amp; Tracking ID</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
+                                  dover lipsum lorem and the others.</p>
+                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
+                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="{{asset('template')}}/assets/images/services-image-04.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>Enjoy &amp; Travel</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
+                                  dover lipsum lorem and the others.</p>
+                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
+                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="{{asset('template')}}/assets/images/services-image.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>          
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -815,7 +997,7 @@
                         <input required type="subject" name="pendidikan_non_akademik" id="pendidikan_non_akademik" placeholder="Pendidikan Non Akademik">
                       </fieldset>
                       <fieldset>
-                        <input required type="subject" name="ratecard" id="ratecard" placeholder="Masukan Ratecard anda">
+                        <input required type="subject" name="tarif" id="tarif" placeholder="Masukan tarif anda">
                       </fieldset>
                       <fieldset>
                         <textarea required name="alamat" class="form-control" id="alamat" placeholder="Alamat (Kecamatan,Kota,Provinsi)"></textarea>  
@@ -854,7 +1036,7 @@
         formData.append("keahlian", $("#keahlian").val());
         formData.append("portofolio_kegiatan", $("#portofolio_kegiatan").val());
         formData.append("jenis_mentor", $("#jenis_mentor").val());
-        formData.append("ratecard", $("#ratecard").val());
+        formData.append("tarif", $("#tarif").val());
         
         // Append files to FormData
         formData.append("sertifikat_keahlian", $("#sertifikat_keahlian")[0].files[0]);
@@ -878,5 +1060,10 @@
         });
     });
 </script>
+@if(session('alert_message'))
+    <script>
+        window.alert("{{ session('alert_message') }}");
+    </script>
+@endif
 
 @include('template.footer')

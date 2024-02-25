@@ -98,7 +98,8 @@ https://templatemo.com/tm-568-digimedia
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="{{url('/')}}" class="logo">
-              <img src="{{asset('template')}}/assets/images/logo-v1.png" alt="">
+              {{-- <img src="{{asset('template')}}/assets/images/logo-v1.png" alt=""> --}}
+            <b style="color: #7761B7"> PT. Hafara Aqiba Nusantara</b> 
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
@@ -108,15 +109,17 @@ https://templatemo.com/tm-568-digimedia
               <li class="scroll-to-section"><a href="#mentor">Pilih Trainer</a></li> 
               <li class="scroll-to-section"><a href="#portofolio">Portofolio</a></li>
               <li class="scroll-to-section"><a href="#tentang_kami">Tentang Kami</a></li>
+              <li class="scroll-to-section"><a href="#pendaftaran_trainer">Pendaftaran Trainer</a></li>
+
               {{-- <li class="scroll-to-section"><a href="{{url('pembatalan')}}">Pembatalan</a></li> --}}
 
               {{-- <li class="scroll-to-section"><a href="#DaftarMentor">Daftar Mentor</a></li>  --}}
-              @auth
+              {{-- @auth
                 @if (auth()->user()->is_admin == 1)                  
                     <li class="scroll-to-section"><a href="{{url('admin/tambah_mentor')}}">Tambah Mentor</a></li> 
                 @endif
-                {{-- <li class="scroll-to-section"><a href="{{url('logout')}}">Log Out</a></li>  --}}
-              @endauth
+                <li class="scroll-to-section"><a href="{{url('logout')}}">Log Out</a></li> 
+              @endauth --}}
 
               <li style="display: none" class="scroll-to-section"><div class="border-first-button"><a href="#contact">Free Quote</a></div></li> 
             </ul>        

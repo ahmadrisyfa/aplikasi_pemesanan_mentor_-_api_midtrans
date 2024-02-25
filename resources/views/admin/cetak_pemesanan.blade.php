@@ -43,7 +43,7 @@
           <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$value->nama}}</td>
-            <td>{{$value->mentor->nama}}</td>
+            <td>{{$value->mentor->nama_lengkap}}</td>
             <td>{{$value->tanggal_kegiatan}}</td>                      
             <td>{{$value->jam}}</td>
             <td>{{ 'Rp. ' . number_format($value->jumlah_pembayaran, 0, ',', '.') }}</td>

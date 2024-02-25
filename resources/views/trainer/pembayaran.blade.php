@@ -42,7 +42,7 @@
                 <td>{{$data->tanggal}}</td>                
                 {{-- <td>{{ 'Rp. ' . number_format($data->jumlah_potongan, 0, ',', '.') }}</td>                 --}}
                 <td>{{ 'Rp. ' . number_format($data->jumlah_pembayaran, 0, ',', '.') }}</td>
-                <td><img src="{{asset($data->foto_pembayaran)}}" alt="" width="200px"></td>                
+                <td><img src="{{asset('storage/'.$data->foto_pembayaran)}}" alt="" width="200px"></td>                
 
                 <td>
                   <button type="button" class="btn btn-primary btn-sm detail-button"
@@ -147,7 +147,7 @@
                 $('#edit_tanggal').val(data.tanggal)                       
                 // $('#edit_jumlah_potongan').val(data.jumlah_potongan)                       
                 $('#edit_jumlah_pembayaran').val(data.jumlah_pembayaran)                       
-                $('#edit_foto_pembayaran_tampil').attr('src', data.foto_pembayaran);                    
+                $('#edit_foto_pembayaran_tampil').attr('src', '<?= asset('storage') ?>/' + data.foto_pembayaran);                    
 
             },
             error: function(xhr) {

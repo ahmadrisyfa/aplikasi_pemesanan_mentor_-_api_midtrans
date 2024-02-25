@@ -303,7 +303,7 @@
             
             <li class="nav-item">
               <a class="nav-link collapsed" href="{{url('admin/pemesanan')}}">
-                <i class="bi bi-bag-check-fill"></i><span>Pemesanan</span>
+                <i class="bi bi-bag-check-fill"></i><span>Pembayaran Layanan</span>
               </a>
             </li>
             <li class="nav-item">

@@ -97,8 +97,8 @@
                   </label>
             </div>    --}}
             <div class="col-12">
-                <label for="jenis_satuan_barang" class="form-label">Rate Card</label>
-                <input  type="number" class="form-control" id="detail_pendaftaran_ratecard">
+                <label for="jenis_satuan_barang" class="form-label">Tarif</label>
+                <input  type="number" class="form-control" id="detail_pendaftaran_tarif">
             </div>   
             <div class="col-12 mt-2">
               <button type="reset" class="btn btn-primary">Reset</button>            
@@ -128,20 +128,20 @@
                 $('#detail_pendaftaran_pendidikan_non_akademik').val(data.pendidikan_non_akademik);
                 $('#detail_pendaftaran_keahlian').val(data.keahlian);
                 $('#detail_pendaftaran_portofolio_kegiatan').val(data.portofolio_kegiatan);
-                // $('#detail_pendaftaran_sertifikat_keahlian').attr('src', data.sertifikat_keahlian);
+                // $('#detail_pendaftaran_sertifikat_keahlian').attr('src', '<?= asset('storage') ?>/' + data.sertifikat_keahlian);
                 var containerForImages = $('#container_for_images');
                 containerForImages.empty(); // Kosongkan container untuk menghindari duplikasi
 
                 if (Array.isArray(data.sertifikat_keahlian) && data.sertifikat_keahlian.length > 0) {
                     for (var i = 0; i < data.sertifikat_keahlian.length; i++) {
-                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', data.sertifikat_keahlian[i]).addClass('sertifikat-image');
+                        var imgElement = $('<img  style="max-width: 300px;margin-bottom:20px;margin-right:20px">').attr('src', '<?= asset('storage') ?>/' + data.sertifikat_keahlian[i]).addClass('sertifikat-image');
                         containerForImages.append(imgElement);
                     }
                 } else {
                     containerForImages.append('<p>Tidak ada sertifikat keahlian yang diunggah.</p>');
                 }
-                $('#detail_pendaftaran_cuplikan_vidio_profile_tampil').attr('src', data.cuplikan_vidio_profile);
-                $('#detail_pendaftaran_upload_foto_tampil').attr('src', data.upload_foto);
+                $('#detail_pendaftaran_cuplikan_vidio_profile_tampil').attr('src', '<?= asset('storage') ?>/' + data.cuplikan_vidio_profile);
+                $('#detail_pendaftaran_upload_foto_tampil').attr('src', '<?= asset('storage') ?>/' + data.upload_foto);
                 // $('#detail_pendaftaran_jenis_mentor').val(data.jenis_mentor);
                 var jenisMentorValues = data.jenis_mentor;
                 $('input[id="detail_pendaftaran_jenis_mentor[]"]').each(function() {
@@ -153,7 +153,7 @@
                         $(this).prop('checked', false);
                     }
                 });
-                $('#detail_pendaftaran_ratecard').val(data.ratecard);
+                $('#detail_pendaftaran_tarif').val(data.tarif);
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
@@ -184,7 +184,7 @@
 
         formData.append("detail_pendaftaran_jenis_mentor", selectedMentorTypes);
 
-        formData.append("detail_pendaftaran_ratecard", $("#detail_pendaftaran_ratecard").val());
+        formData.append("detail_pendaftaran_tarif", $("#detail_pendaftaran_tarif").val());
         
       
     

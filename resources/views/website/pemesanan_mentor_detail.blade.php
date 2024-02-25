@@ -37,13 +37,13 @@
                         <span><b>Keahlian: </b>{{$mentor->keahlian}}</span> <br><br>
                         <span><b>Pendidikan: </b>{{$mentor->pendidikan}}</span> <br><br>
                         <span><b>Portofolio: </b>{{$mentor->portofolio_kegiatan}}</span> <br><br>
-                        <span><b>Vidio profile: <br></b><video src="{{$mentor->cuplikan_vidio_profile}}" width="400" height="300" controls>Your browser does not support the video tag.</video></span> <br><br>                        
+                        <span><b>Vidio profile: <br></b><video src="{{asset('storage/'.$mentor->cuplikan_vidio_profile)}}" width="400" height="300" controls>Your browser does not support the video tag.</video></span> <br><br>                        
                       </div>                    
                       <div class="col-lg-6">
                         {{-- <span><b>Harga: </b>{{ 'Rp. ' . number_format($mentor->harga, 0, ',', '.') }}</span> <br><br> --}}
                         <span><b>Jenis: </b>{{$mentor->jenis_mentor}}</span> <br><br>
                         <span><b>Alamat: </b>{{$mentor->alamat}}</span> <br><br>
-                        <span><b>Foto Trainer: <br> </b><img src="{{$mentor->upload_foto}}" style="max-width: 300px; max-height: 300px;" alt=""></span> <br><br>
+                        <span><b>Foto Trainer: <br> </b><img src="{{asset('storage/'.$mentor->upload_foto)}}" style="max-width: 300px; max-height: 300px;" alt=""></span> <br><br>
                     </div>   
                     <div class="col-lg-12">
                       <div class="accordion accordion-flush" id="accordionFlushExample">

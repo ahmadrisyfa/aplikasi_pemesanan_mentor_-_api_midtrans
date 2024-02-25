@@ -79,7 +79,7 @@
                         <th>Harga</th>
                     </tr>                
                     <tr>
-                        <td>{{$data->mentor->nama}}</td>
+                        <td>{{$data->mentor->nama_lengkap}}</td>
                         <td>{{$data->tanggal_kegiatan}}</td>
                         <td>Rp.{{ number_format($data->jumlah_pembayaran, 2, ',', '.') }}</td>
                     </tr>

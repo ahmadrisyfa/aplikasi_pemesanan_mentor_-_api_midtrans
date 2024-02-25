@@ -9,6 +9,8 @@ use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AcceptTrainerMail;
+use App\Mail\KirimStatusEmail;
+
 
 class MentorController extends Controller
 {
@@ -36,13 +38,13 @@ class MentorController extends Controller
 
             // $sertifikat_keahlian = $request->file('sertifikat_keahlian');
             // $pathFoto = $sertifikat_keahlian->store('public/foto_sertifikat'); 
-            // $data->sertifikat_keahlian = asset('storage/' . str_replace('public/', '', $pathFoto));
+            // $data->sertifikat_keahlian =  $pathFoto;
             if ($request->hasFile('sertifikat_keahlian')) {
                 $sertifikat_keahlianPaths = [];
     
                 foreach ($request->file('sertifikat_keahlian') as $file) {
                     $pathFoto = $file->store('public/foto_sertifikat');
-                    $sertifikat_keahlianPaths[] = asset('storage/' . str_replace('public/', '', $pathFoto));
+                    $sertifikat_keahlianPaths[] =  $pathFoto;
                 }
     
                 $data->sertifikat_keahlian = $sertifikat_keahlianPaths;
@@ -50,25 +52,23 @@ class MentorController extends Controller
 
             $foto = $request->file('upload_foto');
             $pathFoto = $foto->store('public/foto'); 
-            $data->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $data->upload_foto =  $pathFoto;
 
             $video = $request->file('cuplikan_vidio_profile');
             $pathVideo = $video->store('public/video'); 
-            $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+            $data->cuplikan_vidio_profile =  $pathVideo;
         
         $data->jenis_mentor = $request->jenis_mentor;
-        $data->ratecard = $request->ratecard;
+        $data->tarif = $request->tarif;
+        $data->status = 2;
+
         $data->save();
         
+        Mail::to($data->email)->send(new KirimStatusEmail($data->nama_lengkap, $data->email,$data->id));
 
         return response()->json(['message' => 'Data created successfully']);
     }    
-    public function pemesanan_mentor($id)
-    {   
-        $mentor = PendaftaranMentor::find($id);
-        // dd($mentor);    
-        return view('website.pemesanan_mentor',compact('mentor'));
-    }
+
     public function tambah_mentor_detail($id)
     {
         $data = PendaftaranMentor::find($id);
@@ -92,13 +92,13 @@ class MentorController extends Controller
 
             // $sertifikat_keahlian = $request->file('sertifikat_keahlian');
             // $pathFoto = $sertifikat_keahlian->store('public/foto_sertifikat'); 
-            // $data->sertifikat_keahlian = asset('storage/' . str_replace('public/', '', $pathFoto));
+            // $data->sertifikat_keahlian =  $pathFoto;
             if ($request->hasFile('sertifikat_keahlian')) {
                 $sertifikat_keahlianPaths = [];
     
                 foreach ($request->file('sertifikat_keahlian') as $file) {
                     $pathFoto = $file->store('public/foto_sertifikat');
-                    $sertifikat_keahlianPaths[] = asset('storage/' . str_replace('public/', '', $pathFoto));
+                    $sertifikat_keahlianPaths[] =  $pathFoto;
                 }
     
                 $data->sertifikat_keahlian = $sertifikat_keahlianPaths;
@@ -106,14 +106,14 @@ class MentorController extends Controller
 
             $foto = $request->file('upload_foto');
             $pathFoto = $foto->store('public/foto'); 
-            $data->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $data->upload_foto =  $pathFoto;
 
             $video = $request->file('cuplikan_vidio_profile');
             $pathVideo = $video->store('public/video'); 
-            $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+            $data->cuplikan_vidio_profile =  $pathVideo;
         
         $data->jenis_mentor = $request->jenis_mentor;
-        $data->ratecard = $request->ratecard;
+        $data->tarif = $request->tarif;
         $data->save();
         
 
@@ -207,7 +207,7 @@ class MentorController extends Controller
             $sertifikat_keahlianPaths = [];
             foreach ($request->file('edit_pendaftaran_sertifikat_keahlian') as $file) {
                 $pathFoto = $file->store('public/foto_sertifikat');
-                $sertifikat_keahlianPaths[] = asset('storage/' . str_replace('public/', '', $pathFoto));
+                $sertifikat_keahlianPaths[] =  $pathFoto;
             }
             $data->sertifikat_keahlian = $sertifikat_keahlianPaths;
         }
@@ -222,7 +222,7 @@ class MentorController extends Controller
         if ($request->hasFile('edit_pendaftaran_upload_foto')) {
             $foto = $request->file('edit_pendaftaran_upload_foto');
             $pathFoto = $foto->store('public/foto');
-            $data->upload_foto = asset('storage/' . str_replace('public/', '', $pathFoto));
+            $data->upload_foto =  $pathFoto;
         }
         
         // Menghapus video sebelumnya
@@ -235,37 +235,57 @@ class MentorController extends Controller
         if ($request->hasFile('edit_pendaftaran_cuplikan_vidio_profile')) {
             $video = $request->file('edit_pendaftaran_cuplikan_vidio_profile');
             $pathVideo = $video->store('public/video');
-            $data->cuplikan_vidio_profile = asset('storage/' . str_replace('public/', '', $pathVideo));
+            $data->cuplikan_vidio_profile =  $pathVideo;
         }
         
         $data->jenis_mentor = $request->edit_pendaftaran_jenis_mentor;
-        $data->ratecard = $request->edit_pendaftaran_ratecard;
+        $data->tarif = $request->edit_pendaftaran_tarif;
         $data->save();
     
         return response()->json(['message' => 'Data updated successfully']);
+    }
+    public function update_status_email($id)
+    {
+        $mentor = PendaftaranMentor::find($id);
+
+        $mentor->status = 0;    
+        $mentor->save();
+        // return redirect('/')->with('')
+        return redirect('/')->with('alert_message', 'Akun Anda Sudah Berhasil Di Aktifkan,Silahkan Untuk Menunggu Admin Menerima Pendaftaran Trainer Anda');
+
     }
     public function pemesanan_mentor_detail($id)
     {
         $mentor = PendaftaranMentor::find($id);
         return view('website.pemesanan_mentor_detail',compact('mentor'));
     }
-    public function pemesanan_mentor_store(Request $request)
+
+    public function pemesanan_mentor($id)
+    {   
+        $mentor = Pemesanan::find($id);
+        // dd($mentor);    
+        return view('website.pemesanan_mentor',compact('mentor'));
+    }
+    public function pemesanan_mentor_store(Request $request,$id)
     {
 
-        $data = new Pemesanan();
-        $data->nama = $request->nama;
-        $data->mentor_id = $request->mentor_id;        
-        $data->instansi = $request->instansi;
-        $data->alamat_instansi = $request->alamat_instansi;
-        $data->lokasi_kegiatan = $request->lokasi_kegiatan;
-        $data->tanggal_kegiatan = $request->tanggal_kegiatan;
-        $data->jam = $request->jam;
-        $data->no_hp = $request->no_hp;
-        $data->kendala_yang_di_alami = $request->kendala_yang_di_alami;
-        $data->harapan_dari_adanya_kegiatan = $request->harapan_dari_adanya_kegiatan;
-        $data->bayar = 0;
-        $data->jumlah_pembayaran = $request->jumlah_pembayaran;        
-        $data->save();
+        // $data = new Pemesanan();
+        // $data->nama = $request->nama;
+        // $data->mentor_id = $request->mentor_id;        
+        // $data->instansi = $request->instansi;
+        // $data->alamat_instansi = $request->alamat_instansi;
+        // $data->lokasi_kegiatan = $request->lokasi_kegiatan;
+        // $data->tanggal_kegiatan = $request->tanggal_kegiatan;
+        // $data->jam = $request->jam;
+        // $data->no_hp = $request->no_hp;
+        // $data->kendala_yang_di_alami = $request->kendala_yang_di_alami;
+        // $data->harapan_dari_adanya_kegiatan = $request->harapan_dari_adanya_kegiatan;
+        // $data->bayar = 0;
+        // $data->jumlah_pembayaran = $request->jumlah_pembayaran;        
+        // $data->save();
+
+        $data = Pemesanan::find($id);
+
 
         // $order = Pemesanan::create($request->all());
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
@@ -278,7 +298,8 @@ class MentorController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $data->id,
+                // 'order_id' => $data->id,
+                'order_id' => $data->no_hp,
                 'gross_amount' => $data->jumlah_pembayaran,
             ),
             'customer_details' => array(

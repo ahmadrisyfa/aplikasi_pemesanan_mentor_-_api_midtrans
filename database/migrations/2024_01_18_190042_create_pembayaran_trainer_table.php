@@ -17,12 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('nik');
             $table->string('nama');
-            $table->string('jenis_trainer');
+            $table->unsignedBigInteger('jenis_trainer');
             $table->string('tanggal');
             $table->string('jumlah_potongan');
             $table->string('jumlah_pembayaran');
             $table->string('foto_pembayaran');
             $table->timestamps();
+
+            
+            $table->foreign('jenis_trainer')
+                    ->references('id')->on('pendaftaran_mentor')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 
@@ -36,3 +42,4 @@ return new class extends Migration
         Schema::dropIfExists('pembayaran_trainer');
     }
 };
+
